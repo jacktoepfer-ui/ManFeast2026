@@ -89,7 +89,7 @@
                             <input type="checkbox" name="days" value="Oct 16" class="day-checkbox w-5 h-5 text-rose-600 rounded border-slate-700 focus:ring-0">
                             <div>
                                 <span class="text-xs sm:text-sm font-bold text-white block">Friday, Oct 16</span>
-                                <span class="text-[10px] text-slate-400">Arrival & Setup</span>
+                                <span class="text-[10px] text-slate-400">Movie & Arrival</span>
                             </div>
                         </label>
 
@@ -123,36 +123,21 @@
                     </div>
                 </div>
 
-                <!-- Dynamic Daily Food Fields -->
+                <!-- Dynamic Daily Options -->
                 <div class="space-y-4 pt-3 border-t border-slate-800">
-                    <h3 class="text-xs font-bold text-rose-400 uppercase tracking-wider">Food & Drink Contributions</h3>
                     
-                    <!-- Oct 16 Food -->
-                    <div id="foodBlock16" class="hidden bg-feast-dark p-3.5 rounded-xl border border-rose-900/60 grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div>
-                            <label class="block text-[10px] font-bold text-rose-400 uppercase mb-1">Oct 16 Category</label>
-                            <select name="food16Category" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-rose-500">
-                                <option value="">Select Category...</option>
-                                <option value="Main / Grill Item">Main / Grill Item</option>
-                                <option value="Side Dish">Side Dish</option>
-                                <option value="Snacks & Appetizers">Snacks & Appetizers</option>
-                                <option value="Beer / Alcohol">Beer / Alcohol</option>
-                                <option value="Non-Alcoholic Drinks">Non-Alcoholic Drinks</option>
-                                <option value="Cigars / Tobacco">Cigars / Tobacco</option>
-                                <option value="Supplies / Paper Goods">Supplies / Paper Goods</option>
-                            </select>
-                        </div>
-                        <div class="sm:col-span-2">
-                            <label class="block text-[10px] font-bold text-rose-400 uppercase mb-1">Oct 16 Dish / Item Details</label>
-                            <input type="text" name="food16Details" placeholder="e.g. Case of IPA beer & potato chips" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-rose-500">
-                        </div>
+                    <!-- Oct 16 Movie Suggestion (Replaces Food for Friday) -->
+                    <div id="foodBlock16" class="hidden bg-feast-dark p-3.5 rounded-xl border border-rose-900/60">
+                        <label class="block text-[10px] font-bold text-rose-400 uppercase mb-1">🎬 Friday Night Movie Choice</label>
+                        <input type="text" name="food16Details" placeholder="What movie do you want to watch Friday night?" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500">
+                        <input type="hidden" name="food16Category" value="Movie Choice">
                     </div>
 
                     <!-- Oct 17 Food -->
                     <div id="foodBlock17" class="hidden bg-feast-dark p-3.5 rounded-xl border border-rose-800/80 grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div>
                             <label class="block text-[10px] font-bold text-rose-300 uppercase mb-1">Oct 17 Category</label>
-                            <select name="food17Category" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-rose-500">
+                            <select name="food17Category" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500">
                                 <option value="">Select Category...</option>
                                 <option value="Main / Feast Meat">Main / Feast Meat</option>
                                 <option value="Side Dish / BBQ">Side Dish / BBQ</option>
@@ -165,7 +150,7 @@
                         </div>
                         <div class="sm:col-span-2">
                             <label class="block text-[10px] font-bold text-rose-300 uppercase mb-1">Oct 17 Dish / Item Details</label>
-                            <input type="text" name="food17Details" placeholder="e.g. Smoked Pork Ribs & BBQ Sauce" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-rose-500">
+                            <input type="text" name="food17Details" placeholder="e.g. Smoked Pork Ribs & BBQ Sauce" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500">
                         </div>
                     </div>
 
@@ -173,7 +158,7 @@
                     <div id="foodBlock18" class="hidden bg-feast-dark p-3.5 rounded-xl border border-blue-900/60 grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div>
                             <label class="block text-[10px] font-bold text-blue-400 uppercase mb-1">Oct 18 Category</label>
-                            <select name="food18Category" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-blue-500">
+                            <select name="food18Category" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
                                 <option value="">Select Category...</option>
                                 <option value="Breakfast Meat">Breakfast Meat</option>
                                 <option value="Eggs / Casserole">Eggs / Casserole</option>
@@ -184,12 +169,13 @@
                         </div>
                         <div class="sm:col-span-2">
                             <label class="block text-[10px] font-bold text-blue-400 uppercase mb-1">Oct 18 Dish / Item Details</label>
-                            <input type="text" name="food18Details" placeholder="e.g. 2 Packs Bacon & Box of Coffee" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-blue-500">
+                            <input type="text" name="food18Details" placeholder="e.g. 2 Packs Bacon & Box of Coffee" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-gradient-to-r from-rose-700 via-rose-600 to-blue-800 hover:from-rose-600 hover:to-blue-700 text-white font-black py-3.5 rounded-xl transition duration-200 shadow-lg uppercase tracking-wider text-xs sm:text-sm border border-slate-600/50 mt-4">
+                <!-- Solid Red Submit Button -->
+                <button type="submit" class="w-full bg-rose-700 hover:bg-rose-600 text-white font-black py-3.5 rounded-xl transition duration-200 shadow-lg uppercase tracking-wider text-xs sm:text-sm border border-rose-500/50 mt-4">
                     ★ Submit / Update Entry ★
                 </button>
             </form>
@@ -242,7 +228,7 @@
         const rosterMobileView = document.getElementById('rosterMobileView');
         const dayCheckboxes = document.querySelectorAll('.day-checkbox');
 
-        // Dynamic Food Inputs Visibility Toggle
+        // Dynamic Options Visibility Toggle
         dayCheckboxes.forEach(cb => {
             cb.addEventListener('change', () => {
                 const dayVal = cb.value;
@@ -262,14 +248,31 @@
             });
         });
 
-        async function fetchRoster() {
+        // Robust Fetch Function with Automatic Mobile Retries and Cache Busting
+        async function fetchRoster(retries = 2) {
             try {
-                const response = await fetch(SCRIPT_URL, { redirect: "follow" });
+                const cacheBusterUrl = `${SCRIPT_URL}?t=${Date.now()}`;
+                const response = await fetch(cacheBusterUrl, {
+                    method: 'GET',
+                    redirect: 'follow'
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
                 const data = await response.json();
                 renderRoster(data);
             } catch (error) {
                 console.error('Error fetching roster:', error);
-                const errorHtml = '<div class="text-center py-6 text-xs text-rose-400 font-semibold">Error loading roster. Check script URL connection.</div>';
+                
+                if (retries > 0) {
+                    console.log(`Retrying roster fetch... (${retries} attempts left)`);
+                    setTimeout(() => fetchRoster(retries - 1), 1200);
+                    return;
+                }
+
+                const errorHtml = '<div class="text-center py-6 text-xs text-rose-400 font-semibold">Unable to load roster. Tap "Refresh" or check mobile network.</div>';
                 rosterMobileView.innerHTML = errorHtml;
                 rosterTableBody.innerHTML = `<tr><td colspan="4">${errorHtml}</td></tr>`;
             }
@@ -317,10 +320,10 @@
                             </div>
                             ${details ? `
                                 <div class="text-xs pt-1">
-                                    <strong class="text-rose-400 uppercase text-[10px] block">${category || 'Contribution'}:</strong>
+                                    <strong class="text-rose-400 uppercase text-[10px] block">${dayTag === 'Oct 16' ? '🎬 Movie Choice:' : (category || 'Contribution:')}</strong>
                                     <span class="text-slate-200">${details}</span>
                                 </div>
-                            ` : '<div class="text-[10px] text-slate-500 italic">No food item listed</div>'}
+                            ` : `<div class="text-[10px] text-slate-500 italic">${dayTag === 'Oct 16' ? 'No movie suggested' : 'No food item listed'}</div>`}
                         </div>
                     `;
                 };
@@ -354,9 +357,9 @@
                             </div>
                             ${details ? `
                                 <div class="text-[11px] text-slate-300">
-                                    <span class="text-rose-400 font-semibold">${category ? category + ': ' : ''}</span>${details}
+                                    <span class="text-rose-400 font-semibold">${dayTag === 'Oct 16' ? '🎬 Movie Choice: ' : (category ? category + ': ' : '')}</span>${details}
                                 </div>
-                            ` : '<div class="text-[10px] text-slate-500 italic">No food item specified</div>'}
+                            ` : `<div class="text-[10px] text-slate-500 italic">${dayTag === 'Oct 16' ? 'No movie suggested' : 'No food item specified'}</div>`}
                         </div>
                     `;
                 };
