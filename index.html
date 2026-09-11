@@ -10,12 +10,12 @@
             theme: {
                 extend: {
                     colors: {
-                        'feast-dark': '#0a0d14',
-                        'feast-card': '#121824',
-                        'feast-gold': '#d97706',
-                        'feast-gold-light': '#f59e0b',
+                        'feast-dark': '#0b0f17',
+                        'feast-card': '#141c2b',
                         'feast-red': '#dc2626',
-                        'feast-blue': '#2563eb'
+                        'feast-crimson': '#e11d48',
+                        'feast-blue': '#2563eb',
+                        'feast-steel': '#cbd5e1'
                     }
                 }
             }
@@ -25,13 +25,13 @@
         .page-bg {
             background-color: #07090e;
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(220, 38, 38, 0.15), transparent 40%),
-                radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.12), transparent 40%);
+                radial-gradient(circle at 50% 0%, rgba(225, 29, 72, 0.18), transparent 45%),
+                radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.12), transparent 45%);
             background-attachment: fixed;
         }
 
         .banner-shadow {
-            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(220, 38, 38, 0.25);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.95), 0 0 20px rgba(225, 29, 72, 0.3);
         }
     </style>
 </head>
@@ -41,40 +41,40 @@
         
         <!-- Header Banner Section -->
         <div class="flex flex-col items-center">
-            <div class="w-full max-w-xl overflow-hidden rounded-xl sm:rounded-2xl border border-red-700/60 banner-shadow bg-feast-dark relative">
+            <div class="w-full max-w-xl overflow-hidden rounded-xl sm:rounded-2xl border border-rose-700/60 banner-shadow bg-feast-dark relative">
                 <img src="banner.JPG" alt="MANFEAST 2026 - Food, Fire & Freedom" class="w-full h-auto object-cover block mx-auto">
             </div>
             
             <div class="mt-3 text-center">
-                <span class="inline-block bg-red-950/80 text-amber-400 border border-red-600/60 px-3 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest">
+                <span class="inline-block bg-rose-950/90 text-slate-100 border border-rose-600/70 px-3.5 py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest shadow-md">
                     ★ GUYS WEEKEND • FOOD, FIRE & FREEDOM ★
                 </span>
             </div>
         </div>
 
         <!-- RSVP Form Card -->
-        <div class="bg-feast-card p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-amber-600/40 shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 via-white to-blue-600"></div>
+        <div class="bg-feast-card p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-slate-700/70 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-600 via-slate-200 to-blue-600"></div>
             
-            <div class="mb-5 border-b border-gray-800 pb-3">
-                <h2 class="text-xl sm:text-2xl font-black text-amber-500 uppercase tracking-wide flex items-center justify-between">
+            <div class="mb-5 border-b border-slate-800 pb-3">
+                <h2 class="text-xl sm:text-2xl font-black text-white uppercase tracking-wide flex items-center justify-between">
                     <span>★ RSVP / Edit Registration</span>
                 </h2>
-                <p class="text-[11px] text-gray-400 mt-0.5">Enter your full name to submit or update an existing entry.</p>
+                <p class="text-[11px] text-slate-400 mt-0.5">Enter your full name to submit or update an existing entry.</p>
             </div>
             
             <form id="rsvpForm" class="space-y-5">
                 <!-- Name & Attending Status -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">Full Name *</label>
+                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">Full Name *</label>
                         <input type="text" name="name" required placeholder="First and Last Name" 
-                            class="w-full bg-feast-dark border border-gray-700 rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 transition shadow-inner">
+                            class="w-full bg-feast-dark border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-rose-500 transition shadow-inner">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-1.5">Attending Status *</label>
-                        <select name="attending" required class="w-full bg-feast-dark border border-gray-700 rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 transition shadow-inner">
+                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">Attending Status *</label>
+                        <select name="attending" required class="w-full bg-feast-dark border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-rose-500 transition shadow-inner">
                             <option value="Yes">Yes, I will be attending!</option>
                             <option value="No">No, unable to make it</option>
                         </select>
@@ -83,29 +83,29 @@
 
                 <!-- Days & Sleeping Over -->
                 <div class="space-y-3 pt-2">
-                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider">Select Days Attending</label>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">Select Days Attending</label>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-gray-800 hover:border-red-500 cursor-pointer transition">
-                            <input type="checkbox" name="days" value="Oct 16" class="day-checkbox w-5 h-5 text-red-600 rounded border-gray-700 focus:ring-0">
+                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-slate-800 hover:border-rose-500 cursor-pointer transition">
+                            <input type="checkbox" name="days" value="Oct 16" class="day-checkbox w-5 h-5 text-rose-600 rounded border-slate-700 focus:ring-0">
                             <div>
                                 <span class="text-xs sm:text-sm font-bold text-white block">Friday, Oct 16</span>
-                                <span class="text-[10px] text-gray-400">Arrival & Setup</span>
+                                <span class="text-[10px] text-slate-400">Arrival & Setup</span>
                             </div>
                         </label>
 
-                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-gray-800 hover:border-amber-500 cursor-pointer transition">
-                            <input type="checkbox" name="days" value="Oct 17" class="day-checkbox w-5 h-5 text-amber-600 rounded border-gray-700 focus:ring-0">
+                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-slate-800 hover:border-rose-500 cursor-pointer transition">
+                            <input type="checkbox" name="days" value="Oct 17" class="day-checkbox w-5 h-5 text-rose-600 rounded border-slate-700 focus:ring-0">
                             <div>
                                 <span class="text-xs sm:text-sm font-bold text-white block">Saturday, Oct 17</span>
-                                <span class="text-[10px] text-amber-500 font-bold">🔥 THE FEAST DAY</span>
+                                <span class="text-[10px] text-rose-400 font-bold">🔥 THE FEAST DAY</span>
                             </div>
                         </label>
 
-                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-gray-800 hover:border-blue-500 cursor-pointer transition">
-                            <input type="checkbox" name="days" value="Oct 18" class="day-checkbox w-5 h-5 text-blue-600 rounded border-gray-700 focus:ring-0">
+                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-slate-800 hover:border-blue-500 cursor-pointer transition">
+                            <input type="checkbox" name="days" value="Oct 18" class="day-checkbox w-5 h-5 text-blue-600 rounded border-slate-700 focus:ring-0">
                             <div>
                                 <span class="text-xs sm:text-sm font-bold text-white block">Sunday, Oct 18</span>
-                                <span class="text-[10px] text-gray-400">Breakfast & Pack Up</span>
+                                <span class="text-[10px] text-slate-400">Breakfast & Pack Up</span>
                             </div>
                         </label>
                     </div>
@@ -113,25 +113,25 @@
                     <!-- Overnight Stay Options -->
                     <div class="flex flex-col sm:flex-row gap-3 sm:gap-6 pt-2 px-1">
                         <label class="inline-flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" name="sleep16" value="Yes" class="w-4 h-4 text-indigo-500 rounded border-gray-700">
+                            <input type="checkbox" name="sleep16" value="Yes" class="w-4 h-4 text-indigo-500 rounded border-slate-700">
                             <span class="text-xs text-indigo-300 font-medium">⛺ Sleeping Over Friday Night (Oct 16)</span>
                         </label>
                         <label class="inline-flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" name="sleep17" value="Yes" class="w-4 h-4 text-indigo-500 rounded border-gray-700">
+                            <input type="checkbox" name="sleep17" value="Yes" class="w-4 h-4 text-indigo-500 rounded border-slate-700">
                             <span class="text-xs text-indigo-300 font-medium">⛺ Sleeping Over Saturday Night (Oct 17)</span>
                         </label>
                     </div>
                 </div>
 
                 <!-- Dynamic Daily Food Fields -->
-                <div class="space-y-4 pt-3 border-t border-gray-800">
-                    <h3 class="text-xs font-bold text-amber-500 uppercase tracking-wider">Food & Drink Contributions</h3>
+                <div class="space-y-4 pt-3 border-t border-slate-800">
+                    <h3 class="text-xs font-bold text-rose-400 uppercase tracking-wider">Food & Drink Contributions</h3>
                     
                     <!-- Oct 16 Food -->
-                    <div id="foodBlock16" class="hidden bg-feast-dark p-3.5 rounded-xl border border-red-900/60 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div id="foodBlock16" class="hidden bg-feast-dark p-3.5 rounded-xl border border-rose-900/60 grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div>
-                            <label class="block text-[10px] font-bold text-red-400 uppercase mb-1">Oct 16 Category</label>
-                            <select name="food16Category" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white focus:border-red-500">
+                            <label class="block text-[10px] font-bold text-rose-400 uppercase mb-1">Oct 16 Category</label>
+                            <select name="food16Category" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-rose-500">
                                 <option value="">Select Category...</option>
                                 <option value="Main / Grill Item">Main / Grill Item</option>
                                 <option value="Side Dish">Side Dish</option>
@@ -143,16 +143,16 @@
                             </select>
                         </div>
                         <div class="sm:col-span-2">
-                            <label class="block text-[10px] font-bold text-red-400 uppercase mb-1">Oct 16 Dish / Item Details</label>
-                            <input type="text" name="food16Details" placeholder="e.g. Case of IPA beer & potato chips" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white focus:border-red-500">
+                            <label class="block text-[10px] font-bold text-rose-400 uppercase mb-1">Oct 16 Dish / Item Details</label>
+                            <input type="text" name="food16Details" placeholder="e.g. Case of IPA beer & potato chips" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-rose-500">
                         </div>
                     </div>
 
                     <!-- Oct 17 Food -->
-                    <div id="foodBlock17" class="hidden bg-feast-dark p-3.5 rounded-xl border border-amber-700/60 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div id="foodBlock17" class="hidden bg-feast-dark p-3.5 rounded-xl border border-rose-800/80 grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div>
-                            <label class="block text-[10px] font-bold text-amber-400 uppercase mb-1">Oct 17 Category</label>
-                            <select name="food17Category" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white focus:border-amber-500">
+                            <label class="block text-[10px] font-bold text-rose-300 uppercase mb-1">Oct 17 Category</label>
+                            <select name="food17Category" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-rose-500">
                                 <option value="">Select Category...</option>
                                 <option value="Main / Feast Meat">Main / Feast Meat</option>
                                 <option value="Side Dish / BBQ">Side Dish / BBQ</option>
@@ -164,8 +164,8 @@
                             </select>
                         </div>
                         <div class="sm:col-span-2">
-                            <label class="block text-[10px] font-bold text-amber-400 uppercase mb-1">Oct 17 Dish / Item Details</label>
-                            <input type="text" name="food17Details" placeholder="e.g. Smoked Pork Ribs & BBQ Sauce" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white focus:border-amber-500">
+                            <label class="block text-[10px] font-bold text-rose-300 uppercase mb-1">Oct 17 Dish / Item Details</label>
+                            <input type="text" name="food17Details" placeholder="e.g. Smoked Pork Ribs & BBQ Sauce" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-rose-500">
                         </div>
                     </div>
 
@@ -173,7 +173,7 @@
                     <div id="foodBlock18" class="hidden bg-feast-dark p-3.5 rounded-xl border border-blue-900/60 grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div>
                             <label class="block text-[10px] font-bold text-blue-400 uppercase mb-1">Oct 18 Category</label>
-                            <select name="food18Category" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white focus:border-blue-500">
+                            <select name="food18Category" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-blue-500">
                                 <option value="">Select Category...</option>
                                 <option value="Breakfast Meat">Breakfast Meat</option>
                                 <option value="Eggs / Casserole">Eggs / Casserole</option>
@@ -184,48 +184,49 @@
                         </div>
                         <div class="sm:col-span-2">
                             <label class="block text-[10px] font-bold text-blue-400 uppercase mb-1">Oct 18 Dish / Item Details</label>
-                            <input type="text" name="food18Details" placeholder="e.g. 2 Packs Bacon & Box of Coffee" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white focus:border-blue-500">
+                            <input type="text" name="food18Details" placeholder="e.g. 2 Packs Bacon & Box of Coffee" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-blue-500">
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-gradient-to-r from-red-700 via-red-600 to-blue-800 hover:from-red-600 hover:to-blue-700 text-white font-black py-3.5 rounded-xl transition duration-200 shadow-lg uppercase tracking-wider text-xs sm:text-sm border border-amber-500/40 mt-4">
+                <button type="submit" class="w-full bg-gradient-to-r from-rose-700 via-rose-600 to-blue-800 hover:from-rose-600 hover:to-blue-700 text-white font-black py-3.5 rounded-xl transition duration-200 shadow-lg uppercase tracking-wider text-xs sm:text-sm border border-slate-600/50 mt-4">
                     ★ Submit / Update Entry ★
                 </button>
             </form>
         </div>
 
         <!-- Roster Section -->
-        <div class="bg-feast-card p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-amber-600/40 shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-white to-red-600"></div>
+        <div class="bg-feast-card p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-slate-700/70 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-slate-200 to-rose-600"></div>
 
-            <div class="flex flex-row items-center justify-between gap-2 mb-4 border-b border-gray-800 pb-3">
-                <h2 class="text-lg sm:text-2xl font-black text-amber-500 uppercase tracking-wide">
+            <div class="flex flex-row items-center justify-between gap-2 mb-4 border-b border-slate-800 pb-3">
+                <h2 class="text-lg sm:text-2xl font-black text-white uppercase tracking-wide">
                     ★ Master Roster
                 </h2>
-                <button onclick="fetchRoster()" class="text-[11px] sm:text-xs bg-feast-dark hover:bg-gray-800 text-amber-400 border border-amber-600/40 px-3 py-1.5 rounded-lg font-bold transition">
+                <button onclick="fetchRoster()" class="text-[11px] sm:text-xs bg-feast-dark hover:bg-slate-800 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg font-bold transition">
                     ↻ Refresh
                 </button>
             </div>
 
-            <!-- Responsive Layout: Stacked Cards on Mobile, Table on Desktop -->
+            <!-- Mobile View (Stacked Cards) -->
             <div id="rosterMobileView" class="block md:hidden space-y-3">
-                <div class="text-center py-6 text-xs text-gray-400">Loading roster...</div>
+                <div class="text-center py-6 text-xs text-slate-400">Loading roster...</div>
             </div>
 
+            <!-- Desktop View (Table) -->
             <div class="hidden md:block overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
-                        <tr class="bg-feast-dark border-b border-amber-600/40 text-xs text-amber-500 uppercase tracking-wider">
+                        <tr class="bg-feast-dark border-b border-slate-700 text-xs text-slate-300 uppercase tracking-wider">
                             <th class="p-3">Attendee Name</th>
                             <th class="p-3">Friday (Oct 16)</th>
                             <th class="p-3">Saturday (Oct 17)</th>
                             <th class="p-3">Sunday (Oct 18)</th>
                         </tr>
                     </thead>
-                    <tbody id="rosterTableBody" class="divide-y divide-gray-800 text-sm">
+                    <tbody id="rosterTableBody" class="divide-y divide-slate-800 text-sm">
                         <tr>
-                            <td colspan="4" class="text-center py-8 text-gray-400">Loading roster entries...</td>
+                            <td colspan="4" class="text-center py-8 text-slate-400">Loading roster entries...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -268,7 +269,7 @@
                 renderRoster(data);
             } catch (error) {
                 console.error('Error fetching roster:', error);
-                const errorHtml = '<div class="text-center py-6 text-xs text-red-400 font-semibold">Error loading roster. Check script URL connection.</div>';
+                const errorHtml = '<div class="text-center py-6 text-xs text-rose-400 font-semibold">Error loading roster. Check script URL connection.</div>';
                 rosterMobileView.innerHTML = errorHtml;
                 rosterTableBody.innerHTML = `<tr><td colspan="4">${errorHtml}</td></tr>`;
             }
@@ -276,7 +277,7 @@
 
         function renderRoster(data) {
             if (!data || data.length === 0) {
-                const emptyHtml = '<div class="text-center py-6 text-xs text-gray-400">No RSVP submissions yet.</div>';
+                const emptyHtml = '<div class="text-center py-6 text-xs text-slate-400">No RSVP submissions yet.</div>';
                 rosterMobileView.innerHTML = emptyHtml;
                 rosterTableBody.innerHTML = `<tr><td colspan="4">${emptyHtml}</td></tr>`;
                 return;
@@ -289,7 +290,7 @@
             );
 
             if (activeData.length === 0) {
-                const emptyHtml = '<div class="text-center py-6 text-xs text-gray-400">No attendees currently registered as attending.</div>';
+                const emptyHtml = '<div class="text-center py-6 text-xs text-slate-400">No attendees currently registered as attending.</div>';
                 rosterMobileView.innerHTML = emptyHtml;
                 rosterTableBody.innerHTML = `<tr><td colspan="4">${emptyHtml}</td></tr>`;
                 return;
@@ -301,7 +302,7 @@
 
                 const renderDayCell = (dayTag, sleepKey, catKey, detKey) => {
                     if (!daysAttending.includes(dayTag)) {
-                        return '<span class="text-gray-600 text-xs italic">Not attending</span>';
+                        return '<span class="text-slate-600 text-xs italic">Not attending</span>';
                     }
 
                     const isSleeping = String(item[sleepKey] || '').toLowerCase() === 'yes';
@@ -316,20 +317,20 @@
                             </div>
                             ${details ? `
                                 <div class="text-xs pt-1">
-                                    <strong class="text-amber-500 uppercase text-[10px] block">${category || 'Contribution'}:</strong>
-                                    <span class="text-gray-200">${details}</span>
+                                    <strong class="text-rose-400 uppercase text-[10px] block">${category || 'Contribution'}:</strong>
+                                    <span class="text-slate-200">${details}</span>
                                 </div>
-                            ` : '<div class="text-[10px] text-gray-500 italic">No food item listed</div>'}
+                            ` : '<div class="text-[10px] text-slate-500 italic">No food item listed</div>'}
                         </div>
                     `;
                 };
 
                 return `
-                    <tr class="hover:bg-gray-800/40 transition">
-                        <td class="p-3 font-bold text-white align-top border-b border-gray-800">${item.name}</td>
-                        <td class="p-3 align-top border-b border-gray-800">${renderDayCell('Oct 16', 'sleep16', 'food16Category', 'food16Details')}</td>
-                        <td class="p-3 align-top border-b border-gray-800">${renderDayCell('Oct 17', 'sleep17', 'food17Category', 'food17Details')}</td>
-                        <td class="p-3 align-top border-b border-gray-800">${renderDayCell('Oct 18', '', 'food18Category', 'food18Details')}</td>
+                    <tr class="hover:bg-slate-800/40 transition">
+                        <td class="p-3 font-bold text-white align-top border-b border-slate-800">${item.name}</td>
+                        <td class="p-3 align-top border-b border-slate-800">${renderDayCell('Oct 16', 'sleep16', 'food16Category', 'food16Details')}</td>
+                        <td class="p-3 align-top border-b border-slate-800">${renderDayCell('Oct 17', 'sleep17', 'food17Category', 'food17Details')}</td>
+                        <td class="p-3 align-top border-b border-slate-800">${renderDayCell('Oct 18', '', 'food18Category', 'food18Details')}</td>
                     </tr>
                 `;
             }).join('');
@@ -346,23 +347,23 @@
                     const details = item[detKey] ? String(item[detKey]).trim() : '';
 
                     return `
-                        <div class="bg-feast-dark p-2.5 rounded-lg border border-gray-800 text-xs">
+                        <div class="bg-feast-dark p-2.5 rounded-lg border border-slate-800 text-xs">
                             <div class="flex justify-between items-center mb-1">
-                                <span class="font-bold text-gray-200">${dayTitle}</span>
+                                <span class="font-bold text-slate-200">${dayTitle}</span>
                                 ${isSleeping ? '<span class="text-[10px] text-indigo-300 font-medium">⛺ Overnight</span>' : ''}
                             </div>
                             ${details ? `
-                                <div class="text-[11px] text-gray-300">
-                                    <span class="text-amber-500 font-semibold">${category ? category + ': ' : ''}</span>${details}
+                                <div class="text-[11px] text-slate-300">
+                                    <span class="text-rose-400 font-semibold">${category ? category + ': ' : ''}</span>${details}
                                 </div>
-                            ` : '<div class="text-[10px] text-gray-500 italic">No food item specified</div>'}
+                            ` : '<div class="text-[10px] text-slate-500 italic">No food item specified</div>'}
                         </div>
                     `;
                 };
 
                 return `
-                    <div class="bg-feast-card/80 p-3.5 rounded-xl border border-gray-800 space-y-2">
-                        <div class="font-bold text-white text-base border-b border-gray-800 pb-1.5 flex justify-between items-center">
+                    <div class="bg-feast-card/80 p-3.5 rounded-xl border border-slate-800 space-y-2">
+                        <div class="font-bold text-white text-base border-b border-slate-800 pb-1.5 flex justify-between items-center">
                             <span>${item.name}</span>
                             <span class="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700/60 px-2 py-0.5 rounded font-bold uppercase">Attending</span>
                         </div>
