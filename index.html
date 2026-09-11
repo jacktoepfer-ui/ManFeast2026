@@ -3,70 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patriotic Feast RSVP & Roster</title>
+    <title>MANFEAST 2026 - RSVP & Roster</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'feast-dark': '#0b0f19',
-                        'feast-card': '#161e2e',
-                        'feast-gold': '#fbbf24',
+                        'feast-dark': '#0a0d14',
+                        'feast-card': '#121824',
+                        'feast-gold': '#f59e0b',
                         'feast-red': '#dc2626',
-                        'feast-blue': '#1d4ed8'
+                        'feast-blue': '#2563eb'
                     }
                 }
             }
         }
     </script>
     <style>
-       body {
-body {
-    background-image: url('banner.JPG');
-    background-size: 500px auto; /* 500px wide, height scales automatically */
-    background-repeat: no-repeat;
-    background-position: center top;
-}
+        /* Ambient Page Texture Overlay */
+        .page-bg {
+            background-color: #07090e;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(220, 38, 38, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.12), transparent 40%);
+            background-attachment: fixed;
+        }
 
-        /* Gold metallic accent text */
+        .banner-shadow {
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9), 0 0 25px rgba(220, 38, 38, 0.25);
+        }
+
         .gold-glow {
-            text-shadow: 0 0 12px rgba(251, 191, 36, 0.35);
-        }
-
-        /* Metallic Red/Blue Borders */
-        .border-patriotic-red {
-            border-color: #ef4444;
-        }
-        .border-patriotic-blue {
-            border-color: #3b82f6;
+            text-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
         }
     </style>
 </head>
-<body class="flag-overlay text-gray-100 font-sans min-h-screen p-4 md:p-8">
+<body class="page-bg text-gray-100 font-sans min-h-screen p-3 sm:p-6 md:p-8">
 
-    <div class="max-w-6xl mx-auto space-y-8">
+    <div class="max-w-5xl mx-auto space-y-8">
         
-        <!-- Patriotic Header -->
-        <div class="text-center space-y-3 pt-4">
-            <div class="inline-flex items-center space-x-2 bg-feast-red/20 text-feast-gold border border-feast-gold/40 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest">
-                <span>★ ★ ★ Official Event Roster ★ ★ ★</span>
+        <!-- Header Banner Section -->
+        <div class="flex flex-col items-center">
+            <div class="w-full max-w-2xl overflow-hidden rounded-2xl border-2 border-red-700/60 banner-shadow bg-feast-dark relative group">
+                <!-- Main Poster Banner Image -->
+                <img src="banner.JPG" alt="MANFEAST 2026 - Food, Fire & Freedom" class="w-full h-auto object-cover block mx-auto">
+                <div class="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl pointer-events-none"></div>
             </div>
-            <h1 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-white to-blue-500 gold-glow uppercase tracking-wider">
-                FEAST RSVP & ROSTER
-            </h1>
-            <p class="text-gray-300 text-sm md:text-base font-medium max-w-xl mx-auto">
-                Sign up, update your daily attendance, and list food contributions for the event.
-            </p>
+            
+            <div class="mt-4 text-center">
+                <span class="inline-block bg-red-900/60 text-feast-gold border border-red-600/60 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest">
+                    ★ GUYS WEEKEND • FOOD, FIRE & FREEDOM ★
+                </span>
+            </div>
         </div>
 
         <!-- RSVP Form Card -->
-        <div class="bg-feast-card/95 p-6 md:p-8 rounded-2xl border-2 border-feast-gold/30 shadow-2xl backdrop-blur-md relative overflow-hidden">
+        <div class="bg-feast-card/95 p-6 md:p-8 rounded-2xl border-2 border-feast-gold/40 shadow-2xl backdrop-blur-md relative overflow-hidden">
             <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-600 via-white to-blue-600"></div>
             
-            <h2 class="text-2xl font-black text-feast-gold mb-6 border-b border-gray-700/80 pb-3 flex items-center justify-between uppercase tracking-wide">
-                <span>★ RSVP / Edit Entry</span>
-                <span class="text-xs font-normal text-gray-400 capitalize">Re-enter full name to update your record</span>
+            <h2 class="text-2xl font-black text-feast-gold mb-6 border-b border-gray-800 pb-3 flex items-center justify-between uppercase tracking-wide">
+                <span>★ RSVP / Edit Registration</span>
+                <span class="text-xs font-normal text-gray-400 capitalize hidden sm:inline">Enter full name to update existing entry</span>
             </h2>
             
             <form id="rsvpForm" class="space-y-6">
@@ -95,23 +93,23 @@ body {
                             <input type="checkbox" name="days" value="Oct 16" class="day-checkbox w-5 h-5 text-red-600 rounded border-gray-600 focus:ring-0">
                             <div>
                                 <span class="text-sm font-bold text-white block">Friday, Oct 16</span>
-                                <span class="text-[11px] text-gray-400">Day 1</span>
+                                <span class="text-[11px] text-gray-400">Arrival & Setup</span>
                             </div>
                         </label>
 
-                        <label class="flex items-center space-x-3 bg-feast-dark/80 p-4 rounded-xl border border-gray-700 hover:border-white cursor-pointer transition">
-                            <input type="checkbox" name="days" value="Oct 17" class="day-checkbox w-5 h-5 text-blue-600 rounded border-gray-600 focus:ring-0">
+                        <label class="flex items-center space-x-3 bg-feast-dark/80 p-4 rounded-xl border border-gray-700 hover:border-feast-gold cursor-pointer transition">
+                            <input type="checkbox" name="days" value="Oct 17" class="day-checkbox w-5 h-5 text-feast-gold rounded border-gray-600 focus:ring-0">
                             <div>
                                 <span class="text-sm font-bold text-white block">Saturday, Oct 17</span>
-                                <span class="text-[11px] text-gray-400">Day 2</span>
+                                <span class="text-[11px] text-feast-gold font-semibold">🔥 THE FEAST DAY 🔥</span>
                             </div>
                         </label>
 
                         <label class="flex items-center space-x-3 bg-feast-dark/80 p-4 rounded-xl border border-gray-700 hover:border-blue-500 cursor-pointer transition">
-                            <input type="checkbox" name="days" value="Oct 18" class="day-checkbox w-5 h-5 text-feast-gold rounded border-gray-600 focus:ring-0">
+                            <input type="checkbox" name="days" value="Oct 18" class="day-checkbox w-5 h-5 text-blue-600 rounded border-gray-600 focus:ring-0">
                             <div>
                                 <span class="text-sm font-bold text-white block">Sunday, Oct 18</span>
-                                <span class="text-[11px] text-gray-400">Day 3</span>
+                                <span class="text-[11px] text-gray-400">Breakfast & Pack Up</span>
                             </div>
                         </label>
                     </div>
@@ -137,35 +135,35 @@ body {
                     <div id="foodBlock16" class="hidden bg-feast-dark/90 p-4 rounded-xl border border-red-500/40 grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                             <label class="block text-[11px] font-bold text-red-400 uppercase mb-1">Oct 16 Category</label>
-                            <input type="text" name="food16Category" placeholder="e.g. Main Dish, Appetizer" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
+                            <input type="text" name="food16Category" placeholder="e.g. Snacks, Beer, Bourbon" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
                         </div>
                         <div class="md:col-span-2">
                             <label class="block text-[11px] font-bold text-red-400 uppercase mb-1">Oct 16 Item Details</label>
-                            <input type="text" name="food16Details" placeholder="e.g. Smoked Pork Ribs & BBQ Sauce" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
+                            <input type="text" name="food16Details" placeholder="e.g. Case of Craft Beer & Chips" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
                         </div>
                     </div>
 
                     <!-- Oct 17 Food -->
-                    <div id="foodBlock17" class="hidden bg-feast-dark/90 p-4 rounded-xl border border-blue-500/40 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div id="foodBlock17" class="hidden bg-feast-dark/90 p-4 rounded-xl border border-yellow-500/40 grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-[11px] font-bold text-blue-400 uppercase mb-1">Oct 17 Category</label>
-                            <input type="text" name="food17Category" placeholder="e.g. Breakfast, Side" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
+                            <label class="block text-[11px] font-bold text-yellow-400 uppercase mb-1">Oct 17 Category</label>
+                            <input type="text" name="food17Category" placeholder="e.g. Main Dish, Side, Cigars" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-[11px] font-bold text-blue-400 uppercase mb-1">Oct 17 Item Details</label>
-                            <input type="text" name="food17Details" placeholder="e.g. Eggs, Bacon, Pancakes" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
+                            <label class="block text-[11px] font-bold text-yellow-400 uppercase mb-1">Oct 17 Item Details</label>
+                            <input type="text" name="food17Details" placeholder="e.g. Smoked Pork Shoulder & Sauce" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
                         </div>
                     </div>
 
                     <!-- Oct 18 Food -->
-                    <div id="foodBlock18" class="hidden bg-feast-dark/90 p-4 rounded-xl border border-yellow-500/40 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div id="foodBlock18" class="hidden bg-feast-dark/90 p-4 rounded-xl border border-blue-500/40 grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-[11px] font-bold text-yellow-400 uppercase mb-1">Oct 18 Category</label>
-                            <input type="text" name="food18Category" placeholder="e.g. Dessert, Beverage" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
+                            <label class="block text-[11px] font-bold text-blue-400 uppercase mb-1">Oct 18 Category</label>
+                            <input type="text" name="food18Category" placeholder="e.g. Breakfast, Coffee" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-[11px] font-bold text-yellow-400 uppercase mb-1">Oct 18 Item Details</label>
-                            <input type="text" name="food18Details" placeholder="e.g. Apple Pie & Vanilla Ice Cream" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
+                            <label class="block text-[11px] font-bold text-blue-400 uppercase mb-1">Oct 18 Item Details</label>
+                            <input type="text" name="food18Details" placeholder="e.g. Sausage & Bacon Bagels" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
                         </div>
                     </div>
                 </div>
@@ -176,13 +174,13 @@ body {
             </form>
         </div>
 
-        <!-- Patriotic Roster Table Section -->
-        <div class="bg-feast-card/95 p-6 md:p-8 rounded-2xl border-2 border-feast-gold/30 shadow-2xl backdrop-blur-md relative overflow-hidden">
+        <!-- Roster Table Section -->
+        <div class="bg-feast-card/95 p-6 md:p-8 rounded-2xl border-2 border-feast-gold/40 shadow-2xl backdrop-blur-md relative overflow-hidden">
             <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-white to-red-600"></div>
 
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b border-gray-700/80 pb-3">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b border-gray-800 pb-3">
                 <h2 class="text-2xl font-black text-feast-gold uppercase tracking-wide flex items-center space-x-2">
-                    <span>★ Event Attendance & Contribution Roster</span>
+                    <span>★ MANFEAST 2026 Master Roster</span>
                 </h2>
                 <button onclick="fetchRoster()" class="text-xs bg-feast-dark hover:bg-gray-800 text-feast-gold border border-feast-gold/40 px-4 py-2 rounded-lg font-bold transition">
                     ↻ Refresh Roster
@@ -216,7 +214,7 @@ body {
         const rosterTableBody = document.getElementById('rosterTableBody');
         const dayCheckboxes = document.querySelectorAll('.day-checkbox');
 
-        // Toggle visibility of per-day food input fields dynamically
+        // Dynamic Food Inputs Visibility Toggle
         dayCheckboxes.forEach(cb => {
             cb.addEventListener('change', () => {
                 const dayVal = cb.value;
@@ -284,7 +282,7 @@ body {
                                 ${isSleeping ? '<span class="inline-block text-[10px] bg-indigo-900/80 text-indigo-200 border border-indigo-600/60 px-2 py-0.5 rounded font-bold uppercase">⛺ Overnight</span>' : ''}
                             </div>
                             ${details ? `
-                                <div class="text-xs pt-1 border-t border-gray-800/80">
+                                <div class="text-xs pt-1 border-t border-gray-800">
                                     <strong class="text-feast-gold uppercase text-[11px]">${category ? category + ':' : 'Item:'}</strong> <span class="text-gray-200">${details}</span>
                                 </div>
                             ` : '<div class="text-[11px] text-gray-500 italic">No food item listed</div>'}
@@ -334,7 +332,6 @@ body {
 
                 form.reset();
                 
-                // Hide food input blocks after form reset
                 ['foodBlock16', 'foodBlock17', 'foodBlock18'].forEach(id => {
                     const block = document.getElementById(id);
                     if (block) block.classList.add('hidden');
