@@ -184,116 +184,126 @@
     </div>
 
 <script>
-        // GOOGLE APPS SCRIPT WEB APP URL:
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz4uLEmNo047VUJ03SAISxchr4e9EXF7P7c-jAmNjQiqrWUBv1685a4ulT9H5qLvsnx/exec";
+       // GOOGLE APPS SCRIPT WEB APP URL:
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz4uLEmNo047VUJ03SAISxchr4e9EXF7P7c-jAmNjQiqrWUBv1685a4ulT9H5qLvsnx/exec";
 
-        const form = document.getElementById('rsvpForm');
-        const rosterContainer = document.getElementById('rosterContainer');
+const form = document.getElementById('rsvpForm');
+const rosterContainer = document.getElementById('rosterContainer');
 
-        async function fetchRoster() {
-            try {
-                const response = await fetch(SCRIPT_URL, { redirect: "follow" });
-                const data = await response.json();
-                renderRosterByDay(data);
-            } catch (error) {
-                console.error('Error fetching roster:', error);
-                rosterContainer.innerHTML = '<div class="col-span-3 text-center py-10 text-red-500">Error loading roster. Check Apps Script URL.</div>';
-            }
-        }
+async function fetchRoster() {
+    try {
+        const response = await fetch(SCRIPT_URL, { redirect: "follow" });
+        const data = await response.json();
+        renderRosterByDay(data);
+    } catch (error) {
+        console.error('Error fetching roster:', error);
+        rosterContainer.innerHTML = '<div class="col-span-3 text-center py-10 text-red-500">Error loading roster. Check Apps Script URL.</div>';
+    }
+}
 
-        function renderRosterByDay(data) {
-            if (!data || data.length === 0) {
-                rosterContainer.innerHTML = '<div class="col-span-3 text-center py-10 text-gray-500">No sign-ups yet.</div>';
-                return;
-            }
+function renderRosterByDay(data) {
+    if (!data || data.length === 0) {
+        rosterContainer.innerHTML = '<div class="col-span-3 text-center py-10 text-gray-500">No sign-ups yet.</div>';
+        return;
+    }
 
-            const activeData = data.filter(row => row.name && row.name.toLowerCase() !== 'name' && row.attending === 'Yes');
+    // Standardize checking for attending status (case-insensitive)
+    const activeData = data.filter(row => 
+        row.name && 
+        String(row.name).trim().toLowerCase() !== 'name' && 
+        String(row.attending).trim().toLowerCase() === 'yes'
+    );
 
-            const days = ['Oct 16', 'Oct 17', 'Oct 18'];
+    const days = ['Oct 16', 'Oct 17', 'Oct 18'];
 
-            rosterContainer.innerHTML = days.map(day => {
-                const dayGuests = activeData.filter(item => item.days && item.days.includes(day));
+    rosterContainer.innerHTML = days.map(day => {
+        const dayGuests = activeData.filter(item => item.days && String(item.days).includes(day));
 
-                return `
-                    <div class="bg-feast-card p-5 rounded-xl border border-gray-800 shadow-xl flex flex-col h-full">
-                        <div class="pb-3 mb-4 border-b-2 border-feast-accent-red flex justify-between items-center">
-                            <h3 class="text-xl font-extrabold text-feast-gold uppercase">${day}</h3>
-                            <span class="text-xs bg-feast-dark text-feast-accent-blue px-2.5 py-1 rounded-full font-bold border border-feast-accent-blue">${dayGuests.length} Attending</span>
-                        </div>
+        return `
+            <div class="bg-feast-card p-5 rounded-xl border border-gray-800 shadow-xl flex flex-col h-full">
+                <div class="pb-3 mb-4 border-b-2 border-feast-accent-red flex justify-between items-center">
+                    <h3 class="text-xl font-extrabold text-feast-gold uppercase">${day}</h3>
+                    <span class="text-xs bg-feast-dark text-feast-accent-blue px-2.5 py-1 rounded-full font-bold border border-feast-accent-blue">${dayGuests.length} Attending</span>
+                </div>
 
-                        <div class="space-y-4 flex-grow">
-                            ${dayGuests.length === 0 ? '<p class="text-gray-500 text-sm italic">No guests signed up for this day yet.</p>' : ''}
-                            
-                            ${dayGuests.map(item => `
-                                <div class="bg-feast-dark p-4 rounded-lg border border-gray-800 relative overflow-hidden">
-                                    <div class="flag-bg"></div>
-                                    <div class="relative z-10">
-                                        <div class="flex justify-between items-start">
-                                            <h4 class="font-bold text-white text-base">${item.name}</h4>
-                                        </div>
-
-                                        ${(day === 'Oct 16' && item.sleep16 === 'Yes') || (day === 'Oct 17' && item.sleep17 === 'Yes') ? `
-                                            <span class="inline-block mt-1 text-[10px] bg-indigo-900/80 text-indigo-200 px-2 py-0.5 rounded border border-indigo-700 uppercase font-semibold">⛺ Sleeping Over</span>
-                                        ` : ''}
-
-                                        ${item.details ? `
-                                            <div class="mt-3 pt-2 border-t border-gray-800 text-xs">
-                                                <p class="text-gray-300"><strong class="text-feast-gold uppercase">${item.category || 'Dish'}:</strong> ${item.details}</p>
-                                                ${item.prepStatus ? `<p class="text-[11px] text-gray-400 mt-1 italic">${item.prepStatus}</p>` : ''}
-                                            </div>
-                                        ` : '<p class="text-xs text-gray-500 mt-2 italic">No dish listed</p>'}
-                                    </div>
+                <div class="space-y-4 flex-grow">
+                    ${dayGuests.length === 0 ? '<p class="text-gray-500 text-sm italic">No guests signed up for this day yet.</p>' : ''}
+                    
+                    ${dayGuests.map(item => `
+                        <div class="bg-feast-dark p-4 rounded-lg border border-gray-800 relative overflow-hidden">
+                            <div class="flag-bg"></div>
+                            <div class="relative z-10">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-white text-base">${item.name}</h4>
                                 </div>
-                            `).join('')}
+
+                                ${(day === 'Oct 16' && String(item.sleep16).toLowerCase() === 'yes') || (day === 'Oct 17' && String(item.sleep17).toLowerCase() === 'yes') ? `
+                                    <span class="inline-block mt-1 text-[10px] bg-indigo-900/80 text-indigo-200 px-2 py-0.5 rounded border border-indigo-700 uppercase font-semibold">⛺ Sleeping Over</span>
+                                ` : ''}
+
+                                ${item.details ? `
+                                    <div class="mt-3 pt-2 border-t border-gray-800 text-xs">
+                                        <p class="text-gray-300"><strong class="text-feast-gold uppercase">${item.category || 'Dish'}:</strong> ${item.details}</p>
+                                        ${item.prepStatus ? `<p class="text-[11px] text-gray-400 mt-1 italic">${item.prepStatus}</p>` : ''}
+                                    </div>
+                                ` : '<p class="text-xs text-gray-500 mt-2 italic">No dish listed</p>'}
+                            </div>
                         </div>
-                    </div>
-                `;
-            }).join('');
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.innerText = 'Submitting...';
+
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => {
+        if (key === 'days') {
+            if (!data[key]) data[key] = [];
+            data[key].push(value);
+        } else {
+            data[key] = value;
         }
+    });
+    
+    if (data.days) data.days = data.days.join(', ');
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const submitBtn = form.querySelector('button[type="submit"]');
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'Submitting...';
+    data.sleep16 = data.sleep16 ? 'Yes' : 'No';
+    data.sleep17 = data.sleep17 ? 'Yes' : 'No';
 
-            const formData = new FormData(form);
-            const data = {};
-            formData.forEach((value, key) => {
-                if (key === 'days') {
-                    if (!data[key]) data[key] = [];
-                    data[key].push(value);
-                } else {
-                    data[key] = value;
-                }
-            });
-            
-            if (data.days) data.days = data.days.join(', ');
+    try {
+        // Post as URLSearchParams with no-cors mode to ensure Google Apps Script accepts it
+        const searchParams = new URLSearchParams();
+        Object.keys(data).forEach(key => searchParams.append(key, data[key]));
 
-            data.sleep16 = data.sleep16 ? 'Yes' : 'No';
-            data.sleep17 = data.sleep17 ? 'Yes' : 'No';
-
-            // CONVERT TO URLSearchParams HERE TO PREVENT CORS ISSUES
-            const searchParams = new URLSearchParams();
-            Object.keys(data).forEach(key => searchParams.append(key, data[key]));
-
-            try {
-                await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    body: searchParams,
-                });
-                form.reset();
-                fetchRoster();
-            } catch (error) {
-                console.error('Error submitting RSVP:', error);
-                alert('There was an error submitting your RSVP. Please try again.');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'Submit / Update';
-            }
+        await fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: searchParams
         });
 
-        fetchRoster();
+        form.reset();
+        setTimeout(fetchRoster, 1500); // Small delay to let Apps Script finish appending to Sheet
+    } catch (error) {
+        console.error('Error submitting RSVP:', error);
+        alert('There was an error submitting your RSVP. Please try again.');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Submit / Update';
+    }
+});
+
+fetchRoster();
     </script>
 </body>
 </html>
