@@ -1,155 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ManFeast Tracker</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ManFeast 2026 Headquarters</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'feast-dark': '#0d1117',
+                        'feast-card': '#161b22',
+                        'feast-accent-red': '#cc3333',
+                        'feast-accent-blue': '#0056b3',
+                        'feast-gold': '#c5a059',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0d1117; color: #e6edf3; font-family: sans-serif; }
+        input, select, textarea { color: white !important; }
+        
+        .btn-patriotic {
+            background: linear-gradient(135deg, #cc3333 0%, #a02020 100%);
+            border: 1px solid #701010;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+        }
+        .btn-patriotic:hover {
+            background: linear-gradient(135deg, #e04040 0%, #b03030 100%);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #0056b3 !important;
+            box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.5) !important;
+        }
+
+        .dot { transition: all 0.3s ease-in-out; }
+        input:checked ~ .dot { transform: translateX(100%); background-color: white; }
+        input:checked ~ .block { background-color: #0056b3; }
+
+        .flag-bg {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSIzMCIgdmlld0JveD0iMCAwIDQwIDMwIj48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIGZpbGw9IiNjYzMzMzMiLz48cmVjdCB4PSIyMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjE1IiBmaWxsPSIjMDA1NmIzIi8+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjE1IiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==');
+            background-repeat: repeat;
+            opacity: 0.03;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-gray-100 min-h-screen">
-  <div class="max-w-3xl mx-auto p-4 sm:p-6">
-    <!-- Header -->
-    <header class="text-center py-6 border-b border-gray-800">
-      <h1 class="text-4xl font-extrabold tracking-tight text-amber-500">MANFEAST HEADQUARTERS</h1>
-      <p class="mt-2 text-gray-400">RSVP & Food / Supply Roster</p>
-    </header>
+<body class="p-4 md:p-8">
 
-    <!-- RSVP & Item Form -->
-    <div class="mt-8 bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
-      <h2 class="text-xl font-bold text-amber-400 mb-4">Claim Your Spot & Items</h2>
-      <form id="feastForm" class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-300">Your Name</label>
-          <input type="text" id="name" required placeholder="e.g. Big John" class="mt-1 block w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:ring-amber-500 focus:border-amber-500">
+    <div class="max-w-7xl mx-auto">
+        <!-- HEADER -->
+        <header class="mb-10 pb-6 border-b-4 border-double border-feast-accent-blue">
+            <h1 class="text-5xl font-extrabold text-feast-gold tracking-tight uppercase">ManFeast 2026 Headquarters</h1>
+            <p class="text-xl text-gray-400 mt-2">RSVP & Food / Supply Roster</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- FORM SECTION -->
+            <section class="lg:col-span-1">
+                <div class="bg-feast-card p-6 rounded-xl border-t-4 border-feast-accent-red shadow-2xl">
+                    <h2 class="text-2xl font-bold text-white mb-6 uppercase tracking-wider">Claim Your Spot & Items</h2>
+                    
+                    <form id="rsvpForm" class="space-y-5">
+                        <!-- Name -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300">Your Name</label>
+                            <input type="text" name="name" required class="mt-1 block w-full rounded-md bg-feast-dark border border-gray-700 p-3 shadow-inner">
+                        </div>
+
+                        <!-- Attending -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300">Attending?</label>
+                            <select name="attending" required class="mt-1 block w-full rounded-md bg-feast-dark border border-gray-700 p-3">
+                                <option value="Yes">Yes, Sign Me Up</option>
+                                <option value="No">No, I'm missing out</option>
+                            </select>
+                        </div>
+
+                        <!-- Days Attending -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300">Days Attending</label>
+                            <div class="grid grid-cols-3 gap-3 mt-2">
+                                <label class="flex items-center space-x-2 text-sm">
+                                    <input type="checkbox" name="days" value="Oct 16" class="rounded border-gray-700 text-feast-accent-blue focus:ring-feast-accent-blue bg-feast-dark h-5 w-5">
+                                    <span>Oct 16</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-sm">
+                                    <input type="checkbox" name="days" value="Oct 17" class="rounded border-gray-700 text-feast-accent-blue focus:ring-feast-accent-blue bg-feast-dark h-5 w-5">
+                                    <span>Oct 17</span>
+                                </label>
+                                <label class="flex items-center space-x-2 text-sm">
+                                    <input type="checkbox" name="days" value="Oct 18" class="rounded border-gray-700 text-feast-accent-blue focus:ring-feast-accent-blue bg-feast-dark h-5 w-5">
+                                    <span>Oct 18</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Sleeping Over -->
+                        <div class="space-y-3">
+                            <label class="block text-sm font-medium text-gray-300">Sleeping Over?</label>
+                            <div class="flex items-center justify-between gap-4">
+                                <span class="text-sm">Oct 16, 17</span>
+                                <label for="toggle16" class="flex items-center cursor-pointer">
+                                    <div class="relative">
+                                        <input type="checkbox" id="toggle16" name="sleep16" class="sr-only">
+                                        <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                                        <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between gap-4">
+                                <span class="text-sm">Oct 17, 18</span>
+                                <label for="toggle17" class="flex items-center cursor-pointer">
+                                    <div class="relative">
+                                        <input type="checkbox" id="toggle17" name="sleep17" class="sr-only">
+                                        <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                                        <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Dish Type -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300">Type of dish you're bringing</label>
+                            <select name="category" required class="mt-1 block w-full rounded-md bg-feast-dark border border-gray-700 p-3">
+                                <option value="" disabled selected>Select Category</option>
+                                <option value="Meat/Main">Meat/Main Dish</option>
+                                <option value="Side">Side Dish</option>
+                                <option value="Snack">Snack</option>
+                                <option value="Drink">Drink</option>
+                                <option value="Dessert">Dessert</option>
+                                <option value="Supplies">Supplies/Gear</option>
+                            </select>
+                        </div>
+
+                        <!-- Preparation Status -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300">Preparation Status</label>
+                            <select name="prepStatus" required class="mt-1 block w-full rounded-md bg-feast-dark border border-gray-700 p-3">
+                                <option value="" disabled selected>Select Status</option>
+                                <option value="prepared and ready to eat">prepared and ready to eat</option>
+                                <option value="prepared and needs warming up">prepared and needs warming up</option>
+                                <option value="bringing ingredients and we're making it there">bringing ingredients and we're making it there</option>
+                            </select>
+                        </div>
+
+                        <!-- Details -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300">What are you bringing?</label>
+                            <textarea name="details" rows="3" placeholder="e.g., 5lbs Smoked Brisket, Cooler & Ice" class="mt-1 block w-full rounded-md bg-feast-dark border border-gray-700 p-3"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full btn-patriotic text-white py-4 px-6 rounded-md shadow-lg transition duration-150">Submit / Update</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ROSTER SECTION (SPLIT BY DAY) -->
+            <section class="lg:col-span-2 space-y-6">
+                <h2 class="text-3xl font-bold text-white uppercase tracking-wider">3-Day Feast Roster</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="rosterContainer">
+                    <div class="col-span-3 text-center py-10 text-gray-500">Loading roster...</div>
+                </div>
+            </section>
+            
         </div>
-
-        <div>
-          <label class="block text-sm font-medium text-gray-300">Attending?</label>
-          <select id="attending" class="mt-1 block w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:ring-amber-500 focus:border-amber-500">
-            <option value="Yes">Count Me In 🥩</option>
-            <option value="Maybe">Maybe</option>
-            <option value="No">Can't Make It</option>
-          </select>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-300">Category</label>
-            <select id="category" class="mt-1 block w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:ring-amber-500 focus:border-amber-500">
-              <option value="Meats/Main">Meats / Main Dish</option>
-              <option value="Sides">Sides & Finger Foods</option>
-              <option value="Drinks">Drinks / Beverages</option>
-              <option value="Supplies">Supplies / Ice / Charcoal</option>
-              <option value="Desserts">Desserts</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-300">What are you bringing?</label>
-            <input type="text" id="bringing" placeholder="e.g. 2 Racks of Ribs, Bag of Ice" class="mt-1 block w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:ring-amber-500 focus:border-amber-500">
-          </div>
-        </div>
-
-        <button type="submit" id="submitBtn" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow-md">
-          Submit / Update
-        </button>
-      </form>
+        
+        <footer class="mt-16 pt-8 border-t border-gray-800 text-center text-gray-600 text-sm">
+            ManFeast 2026 | Est. 2023 | All rights reserved.
+        </footer>
     </div>
 
-    <!-- Live Roster & Tracker -->
-    <div class="mt-10">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-2xl font-bold text-amber-400">Current Feast Roster</h2>
-        <span id="headcount" class="bg-amber-900/50 text-amber-300 px-3 py-1 rounded-full text-sm border border-amber-700/50">Attending: 0</span>
-      </div>
+    <script>
+        // REPLACE WITH YOUR ACTUAL GOOGLE APPS SCRIPT WEB APP URL
+        const SCRIPT_URL = https://script.google.com/macros/s/AKfycbwps6a6et7qsQ9pIYhZF2Lb2vzpnIabInD8nVBmibmIH_XmtbYpw7j6F2_CSMzijiEZ/exec;
 
-      <div id="rosterList" class="space-y-3">
-        <p class="text-gray-500 italic text-center py-4">Loading roster...</p>
-      </div>
-    </div>
-  </div>
+        const form = document.getElementById('rsvpForm');
+        const rosterContainer = document.getElementById('rosterContainer');
 
-  <script>
-    // YOUR LIVE GOOGLE APPS SCRIPT WEB APP URL:
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwps6a6et7qsQ9pIYhZF2Lb2vzpnIabInD8nVBmibmIH_XmtbYpw7j6F2_CSMzijiEZ/exec";
+        async function fetchRoster() {
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                renderRosterByDay(data);
+            } catch (error) {
+                console.error('Error fetching roster:', error);
+                rosterContainer.innerHTML = '<div class="col-span-3 text-center py-10 text-red-500">Error loading roster. Check Apps Script URL.</div>';
+            }
+        }
 
-    const form = document.getElementById('feastForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const rosterList = document.getElementById('rosterList');
-    const headcountEl = document.getElementById('headcount');
+        function renderRosterByDay(data) {
+            if (!data || data.length === 0) {
+                rosterContainer.innerHTML = '<div class="col-span-3 text-center py-10 text-gray-500">No sign-ups yet.</div>';
+                return;
+            }
 
-    async function fetchRoster() {
-      try {
-        const res = await fetch(SCRIPT_URL);
-        const data = await res.json();
-        renderRoster(data);
-      } catch (err) {
-        rosterList.innerHTML = `<p class="text-red-400 text-center">Failed to load roster. Check Apps Script deployment settings.</p>`;
-      }
-    }
+            const activeData = data.filter(row => row.name && row.name.toLowerCase() !== 'name' && row.attending === 'Yes');
 
-    function renderRoster(data) {
-      if (!data || data.length === 0) {
-        rosterList.innerHTML = `<p class="text-gray-500 italic text-center py-4">No sign-ups yet. Be the first!</p>`;
-        headcountEl.innerText = "Attending: 0";
-        return;
-      }
+            const days = ['Oct 16', 'Oct 17', 'Oct 18'];
 
-      const count = data.filter(d => d.attending === "Yes").length;
-      headcountEl.innerText = `Attending: ${count}`;
+            rosterContainer.innerHTML = days.map(day => {
+                const dayGuests = activeData.filter(item => item.days && item.days.includes(day));
 
-      rosterList.innerHTML = data.map(item => `
-        <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-          <div>
-            <span class="font-bold text-white text-lg">${escapeHtml(item.name)}</span>
-            <span class="ml-2 text-xs px-2 py-0.5 rounded ${getStatusBadgeClass(item.attending)}">${item.attending}</span>
-          </div>
-          ${item.bringing ? `
-            <div class="text-sm bg-gray-900 px-3 py-1 rounded border border-gray-700 text-amber-300">
-              <span class="text-gray-400">${escapeHtml(item.category)}:</span> ${escapeHtml(item.bringing)}
-            </div>
-          ` : '<span class="text-xs text-gray-500 italic">No items listed</span>'}
-        </div>
-      `).join('');
-    }
+                return `
+                    <div class="bg-feast-card p-5 rounded-xl border border-gray-800 shadow-xl flex flex-col h-full">
+                        <div class="pb-3 mb-4 border-b-2 border-feast-accent-red flex justify-between items-center">
+                            <h3 class="text-xl font-extrabold text-feast-gold uppercase">${day}</h3>
+                            <span class="text-xs bg-feast-dark text-feast-accent-blue px-2.5 py-1 rounded-full font-bold border border-feast-accent-blue">${dayGuests.length} Attending</span>
+                        </div>
 
-    function getStatusBadgeClass(status) {
-      if (status === 'Yes') return 'bg-green-900/80 text-green-300 border border-green-700';
-      if (status === 'Maybe') return 'bg-yellow-900/80 text-yellow-300 border border-yellow-700';
-      return 'bg-red-900/80 text-red-300 border border-red-700';
-    }
+                        <div class="space-y-4 flex-grow">
+                            ${dayGuests.length === 0 ? '<p class="text-gray-500 text-sm italic">No guests signed up for this day yet.</p>' : ''}
+                            
+                            ${dayGuests.map(item => `
+                                <div class="bg-feast-dark p-4 rounded-lg border border-gray-800 relative overflow-hidden">
+                                    <div class="flag-bg"></div>
+                                    <div class="relative z-10">
+                                        <div class="flex justify-between items-start">
+                                            <h4 class="font-bold text-white text-base">${item.name}</h4>
+                                        </div>
 
-    function escapeHtml(str) {
-      return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-    }
+                                        ${(day === 'Oct 16' && item.sleep16 === 'Yes') || (day === 'Oct 17' && item.sleep17 === 'Yes') ? `
+                                            <span class="inline-block mt-1 text-[10px] bg-indigo-900/80 text-indigo-200 px-2 py-0.5 rounded border border-indigo-700 uppercase font-semibold">⛺ Sleeping Over</span>
+                                        ` : ''}
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      submitBtn.disabled = true;
-      submitBtn.innerText = "Saving...";
+                                        ${item.details ? `
+                                            <div class="mt-3 pt-2 border-t border-gray-800 text-xs">
+                                                <p class="text-gray-300"><strong class="text-feast-gold uppercase">${item.category || 'Dish'}:</strong> ${item.details}</p>
+                                                ${item.prepStatus ? `<p class="text-[11px] text-gray-400 mt-1 italic">${item.prepStatus}</p>` : ''}
+                                            </div>
+                                        ` : '<p class="text-xs text-gray-500 mt-2 italic">No dish listed</p>'}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
 
-      const payload = {
-        name: document.getElementById('name').value.trim(),
-        attending: document.getElementById('attending').value,
-        category: document.getElementById('category').value,
-        bringing: document.getElementById('bringing').value.trim()
-      };
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Submitting...';
 
-      try {
-        await fetch(SCRIPT_URL, {
-          method: 'POST',
-          body: JSON.stringify(payload)
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                if (key === 'days') {
+                    if (!data[key]) data[key] = [];
+                    data[key].push(value);
+                } else {
+                    data[key] = value;
+                }
+            });
+            
+            if (data.days) data.days = data.days.join(', ');
+
+            data.sleep16 = data.sleep16 ? 'Yes' : 'No';
+            data.sleep17 = data.sleep17 ? 'Yes' : 'No';
+
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                });
+                form.reset();
+                fetchRoster();
+            } catch (error) {
+                console.error('Error submitting RSVP:', error);
+                alert('There was an error submitting your RSVP. Please try again.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Submit / Update';
+            }
         });
-        form.reset();
-        await fetchRoster();
-      } catch (err) {
-        alert("Error submitting. Please try again.");
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerText = "Submit / Update";
-      }
-    });
 
-    fetchRoster();
-  </script>
+        fetchRoster();
+    </script>
 </body>
 </html>
