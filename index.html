@@ -25,7 +25,6 @@
                 radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.12), transparent 45%);
             background-attachment: fixed;
         }
-
         .banner-shadow {
             box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.95), 0 0 20px rgba(225, 29, 72, 0.3);
         }
@@ -351,7 +350,6 @@
             form.querySelector('[name="name"]').value = data.name || '';
             form.querySelector('[name="attending"]').value = data.attending || 'Yes';
 
-            // Support both new boolean columns (days16) and legacy comma string (days)
             const legacyDays = String(data.days || '').toLowerCase();
             form.querySelector('[name="days16"]').checked = String(data.days16).toLowerCase() === 'yes' || legacyDays.includes('16');
             form.querySelector('[name="days17"]').checked = String(data.days17).toLowerCase() === 'yes' || legacyDays.includes('17');
@@ -371,7 +369,7 @@
             syncDayBlocks();
         }
 
-        async function fetchRoster(retries = 2) {
+        async function fetchRoster() {
             try {
                 const response = await fetch(`${SCRIPT_URL}?t=${Date.now()}`, { redirect: 'follow' });
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -379,10 +377,6 @@
                 renderRoster(data);
             } catch (error) {
                 console.error('Fetch error:', error);
-                if (retries > 0) {
-                    setTimeout(() => fetchRoster(retries - 1), 1200);
-                    return;
-                }
                 const errHtml = '<div class="text-center py-6 text-xs text-rose-400 font-semibold">Unable to load roster. Tap "Refresh".</div>';
                 rosterMobileView.innerHTML = errHtml;
                 rosterTableBody.innerHTML = `<tr><td colspan="4">${errHtml}</td></tr>`;
@@ -390,7 +384,8 @@
         }
 
         function isDayAttending(item, dayKey, legacySearchTag) {
-            if (String(item[dayKey]).toLowerCase() === 'yes') return true;
+            const val = String(item[dayKey] || '').trim().toLowerCase();
+            if (val === 'yes' || val === 'true') return true;
             if (item.days && String(item.days).toLowerCase().includes(legacySearchTag)) return true;
             return false;
         }
@@ -517,11 +512,13 @@
             });
 
             data.phone = data.phone.replace(/\D/g, '');
-            data.days16 = form.querySelector('[name="days16"]')?.checked ? 'Yes' : 'No';
-            data.days17 = form.querySelector('[name="days17"]')?.checked ? 'Yes' : 'No';
-            data.days18 = form.querySelector('[name="days18"]')?.checked ? 'Yes' : 'No';
-            data.sleep16 = form.querySelector('[name="sleep16"]')?.checked ? 'Yes' : 'No';
-            data.sleep17 = form.querySelector('[name="sleep17"]')?.checked ? 'Yes' : 'No';
+            
+            // Explicitly force boolean values for checkboxes so they never evaluate to empty
+            data.days16 = form.querySelector('[name="days16"]').checked ? 'Yes' : 'No';
+            data.days17 = form.querySelector('[name="days17"]').checked ? 'Yes' : 'No';
+            data.days18 = form.querySelector('[name="days18"]').checked ? 'Yes' : 'No';
+            data.sleep16 = form.querySelector('[name="sleep16"]').checked ? 'Yes' : 'No';
+            data.sleep17 = form.querySelector('[name="sleep17"]').checked ? 'Yes' : 'No';
 
             try {
                 await fetch(SCRIPT_URL, {
@@ -533,15 +530,12 @@
 
                 showLookupStatus('✓ RSVP submitted successfully!', 'text-emerald-400');
                 
-                setTimeout(() => {
-                    fetchRoster();
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = '★ Submit / Update Entry ★';
-                }, 1800);
-
+                // Refresh roster immediately without artificial delays
+                await fetchRoster();
             } catch (error) {
                 console.error('Submit error:', error);
                 alert('Could not save RSVP. Please check connection.');
+            } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = '★ Submit / Update Entry ★';
             }
