@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ManFeast Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+  <div class="max-w-3xl mx-auto p-4 sm:p-6">
+    <!-- Header -->
+    <header class="text-center py-6 border-b border-gray-800">
+      <h1 class="text-4xl font-extrabold tracking-tight text-amber-500">MANFEAST HEADQUARTERS</h1>
+      <p class="mt-2 text-gray-400">RSVP & Food / Supply Roster</p>
+    </header>
+
+    <!-- RSVP & Item Form -->
+    <div class="mt-8 bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
+      <h2 class="text-xl font-bold text-amber-400 mb-4">Claim Your Spot & Items</h2>
+      <form id="feastForm" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-300">Your Name</label>
+          <input type="text" id="name" required placeholder="e.g. Big John" class="mt-1 block w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:ring-amber-500 focus:border-amber-500">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-300">Attending?</label>
+          <select id="attending" class="mt-1 block w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:ring-amber-500 focus:border-amber-500">
+            <option value="Yes">Count Me In 🥩</option>
+            <option value="Maybe">Maybe</option>
+            <option value="No">Can't Make It</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-300">Category</label>
+            <select id="category" class="mt-1 block w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:ring-amber-500 focus:border-amber-500">
+              <option value="Meats/Main">Meats / Main Dish</option>
+              <option value="Sides">Sides & Finger Foods</option>
+              <option value="Drinks">Drinks / Beverages</option>
+              <option value="Supplies">Supplies / Ice / Charcoal</option>
+              <option value="Desserts">Desserts</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-300">What are you bringing?</label>
+            <input type="text" id="bringing" placeholder="e.g. 2 Racks of Ribs, Bag of Ice" class="mt-1 block w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white focus:ring-amber-500 focus:border-amber-500">
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow-md">
+          Submit / Update
+        </button>
+      </form>
+    </div>
+
+    <!-- Live Roster & Tracker -->
+    <div class="mt-10">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold text-amber-400">Current Feast Roster</h2>
+        <span id="headcount" class="bg-amber-900/50 text-amber-300 px-3 py-1 rounded-full text-sm border border-amber-700/50">Attending: 0</span>
+      </div>
+
+      <div id="rosterList" class="space-y-3">
+        <p class="text-gray-500 italic text-center py-4">Loading roster...</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // YOUR LIVE GOOGLE APPS SCRIPT WEB APP URL:
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwps6a6et7qsQ9pIYhZF2Lb2vzpnIabInD8nVBmibmIH_XmtbYpw7j6F2_CSMzijiEZ/exec";
+
+    const form = document.getElementById('feastForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const rosterList = document.getElementById('rosterList');
+    const headcountEl = document.getElementById('headcount');
+
+    async function fetchRoster() {
+      try {
+        const res = await fetch(SCRIPT_URL);
+        const data = await res.json();
+        renderRoster(data);
+      } catch (err) {
+        rosterList.innerHTML = `<p class="text-red-400 text-center">Failed to load roster. Check Apps Script deployment settings.</p>`;
+      }
+    }
+
+    function renderRoster(data) {
+      if (!data || data.length === 0) {
+        rosterList.innerHTML = `<p class="text-gray-500 italic text-center py-4">No sign-ups yet. Be the first!</p>`;
+        headcountEl.innerText = "Attending: 0";
+        return;
+      }
+
+      const count = data.filter(d => d.attending === "Yes").length;
+      headcountEl.innerText = `Attending: ${count}`;
+
+      rosterList.innerHTML = data.map(item => `
+        <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+          <div>
+            <span class="font-bold text-white text-lg">${escapeHtml(item.name)}</span>
+            <span class="ml-2 text-xs px-2 py-0.5 rounded ${getStatusBadgeClass(item.attending)}">${item.attending}</span>
+          </div>
+          ${item.bringing ? `
+            <div class="text-sm bg-gray-900 px-3 py-1 rounded border border-gray-700 text-amber-300">
+              <span class="text-gray-400">${escapeHtml(item.category)}:</span> ${escapeHtml(item.bringing)}
+            </div>
+          ` : '<span class="text-xs text-gray-500 italic">No items listed</span>'}
+        </div>
+      `).join('');
+    }
+
+    function getStatusBadgeClass(status) {
+      if (status === 'Yes') return 'bg-green-900/80 text-green-300 border border-green-700';
+      if (status === 'Maybe') return 'bg-yellow-900/80 text-yellow-300 border border-yellow-700';
+      return 'bg-red-900/80 text-red-300 border border-red-700';
+    }
+
+    function escapeHtml(str) {
+      return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Saving...";
+
+      const payload = {
+        name: document.getElementById('name').value.trim(),
+        attending: document.getElementById('attending').value,
+        category: document.getElementById('category').value,
+        bringing: document.getElementById('bringing').value.trim()
+      };
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+        form.reset();
+        await fetchRoster();
+      } catch (err) {
+        alert("Error submitting. Please try again.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Submit / Update";
+      }
+    });
+
+    fetchRoster();
+  </script>
+</body>
+</html>
