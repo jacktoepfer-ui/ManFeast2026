@@ -3,155 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feast Event RSVP & Roster</title>
+    <title>Patriotic Feast RSVP & Roster</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'feast-dark': '#0f172a',
-                        'feast-card': '#1e293b',
-                        'feast-gold': '#f59e0b',
-                        'feast-accent-red': '#ef4444',
-                        'feast-accent-blue': '#3b82f6'
+                        'feast-dark': '#0b0f19',
+                        'feast-card': '#161e2e',
+                        'feast-gold': '#fbbf24',
+                        'feast-red': '#dc2626',
+                        'feast-blue': '#1d4ed8'
                     }
                 }
             }
         }
     </script>
+    <style>
+        /* Flag Background Overlay Pattern */
+        .flag-overlay {
+            background-image: 
+                linear-gradient(rgba(11, 15, 25, 0.88), rgba(11, 15, 25, 0.94)),
+                url('https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Gold metallic accent text */
+        .gold-glow {
+            text-shadow: 0 0 12px rgba(251, 191, 36, 0.35);
+        }
+
+        /* Metallic Red/Blue Borders */
+        .border-patriotic-red {
+            border-color: #ef4444;
+        }
+        .border-patriotic-blue {
+            border-color: #3b82f6;
+        }
+    </style>
 </head>
-<body class="bg-feast-dark text-gray-100 font-sans min-h-screen p-4 md:p-8">
+<body class="flag-overlay text-gray-100 font-sans min-h-screen p-4 md:p-8">
 
     <div class="max-w-6xl mx-auto space-y-8">
-        <!-- Header -->
-        <div class="text-center space-y-2">
-            <h1 class="text-3xl md:text-5xl font-black text-feast-gold uppercase tracking-wider">Feast RSVP & Roster</h1>
-            <p class="text-gray-400 text-sm md:text-base">Sign up, edit your attendance, and list food contributions per day.</p>
+        
+        <!-- Patriotic Header -->
+        <div class="text-center space-y-3 pt-4">
+            <div class="inline-flex items-center space-x-2 bg-feast-red/20 text-feast-gold border border-feast-gold/40 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest">
+                <span>★ ★ ★ Official Event Roster ★ ★ ★</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-white to-blue-500 gold-glow uppercase tracking-wider">
+                FEAST RSVP & ROSTER
+            </h1>
+            <p class="text-gray-300 text-sm md:text-base font-medium max-w-xl mx-auto">
+                Sign up, update your daily attendance, and list food contributions for the event.
+            </p>
         </div>
 
-        <!-- RSVP Form Section -->
-        <div class="bg-feast-card p-6 md:p-8 rounded-2xl border border-gray-800 shadow-2xl">
-            <h2 class="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-2">RSVP / Edit Entry</h2>
+        <!-- RSVP Form Card -->
+        <div class="bg-feast-card/95 p-6 md:p-8 rounded-2xl border-2 border-feast-gold/30 shadow-2xl backdrop-blur-md relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-600 via-white to-blue-600"></div>
+            
+            <h2 class="text-2xl font-black text-feast-gold mb-6 border-b border-gray-700/80 pb-3 flex items-center justify-between uppercase tracking-wide">
+                <span>★ RSVP / Edit Entry</span>
+                <span class="text-xs font-normal text-gray-400 capitalize">Re-enter full name to update your record</span>
+            </h2>
             
             <form id="rsvpForm" class="space-y-6">
-                <!-- Name & Attending -->
+                <!-- Name & Attending Status -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">Full Name *</label>
-                        <input type="text" name="name" required placeholder="Enter your full name" 
-                            class="w-full bg-feast-dark border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-feast-gold">
-                        <span class="text-xs text-gray-400 mt-1 block">Entering an existing name will update that entry.</span>
+                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Full Name *</label>
+                        <input type="text" name="name" required placeholder="First and Last Name" 
+                            class="w-full bg-feast-dark/90 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-feast-gold transition shadow-inner">
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">Attending? *</label>
-                        <select name="attending" required class="w-full bg-feast-dark border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-feast-gold">
-                            <option value="Yes">Yes, attending</option>
+                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Attending Status *</label>
+                        <select name="attending" required class="w-full bg-feast-dark/90 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-feast-gold transition shadow-inner">
+                            <option value="Yes">Yes, I will be attending!</option>
                             <option value="No">No, unable to make it</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- Days Attending & Overnights -->
-                <div class="space-y-3">
-                    <label class="block text-sm font-semibold text-gray-300">Days Attending & Sleeping Over</label>
+                <!-- Days & Sleeping Over -->
+                <div class="space-y-3 pt-2">
+                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider">Select Days Attending</label>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-lg border border-gray-700 cursor-pointer">
-                            <input type="checkbox" name="days" value="Oct 16" class="day-checkbox w-4 h-4 text-feast-gold rounded">
-                            <span class="text-sm font-semibold text-white">Friday, Oct 16</span>
+                        <label class="flex items-center space-x-3 bg-feast-dark/80 p-4 rounded-xl border border-gray-700 hover:border-red-500 cursor-pointer transition">
+                            <input type="checkbox" name="days" value="Oct 16" class="day-checkbox w-5 h-5 text-red-600 rounded border-gray-600 focus:ring-0">
+                            <div>
+                                <span class="text-sm font-bold text-white block">Friday, Oct 16</span>
+                                <span class="text-[11px] text-gray-400">Day 1</span>
+                            </div>
                         </label>
 
-                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-lg border border-gray-700 cursor-pointer">
-                            <input type="checkbox" name="days" value="Oct 17" class="day-checkbox w-4 h-4 text-feast-gold rounded">
-                            <span class="text-sm font-semibold text-white">Saturday, Oct 17</span>
+                        <label class="flex items-center space-x-3 bg-feast-dark/80 p-4 rounded-xl border border-gray-700 hover:border-white cursor-pointer transition">
+                            <input type="checkbox" name="days" value="Oct 17" class="day-checkbox w-5 h-5 text-blue-600 rounded border-gray-600 focus:ring-0">
+                            <div>
+                                <span class="text-sm font-bold text-white block">Saturday, Oct 17</span>
+                                <span class="text-[11px] text-gray-400">Day 2</span>
+                            </div>
                         </label>
 
-                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-lg border border-gray-700 cursor-pointer">
-                            <input type="checkbox" name="days" value="Oct 18" class="day-checkbox w-4 h-4 text-feast-gold rounded">
-                            <span class="text-sm font-semibold text-white">Sunday, Oct 18</span>
+                        <label class="flex items-center space-x-3 bg-feast-dark/80 p-4 rounded-xl border border-gray-700 hover:border-blue-500 cursor-pointer transition">
+                            <input type="checkbox" name="days" value="Oct 18" class="day-checkbox w-5 h-5 text-feast-gold rounded border-gray-600 focus:ring-0">
+                            <div>
+                                <span class="text-sm font-bold text-white block">Sunday, Oct 18</span>
+                                <span class="text-[11px] text-gray-400">Day 3</span>
+                            </div>
                         </label>
                     </div>
 
-                    <div class="flex flex-wrap gap-6 pt-2">
+                    <!-- Overnight Stay Options -->
+                    <div class="flex flex-wrap gap-6 pt-3 px-1">
                         <label class="inline-flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" name="sleep16" value="Yes" class="w-4 h-4 text-indigo-600 rounded">
-                            <span class="text-xs text-gray-300">Sleeping over Friday Night (Oct 16)</span>
+                            <input type="checkbox" name="sleep16" value="Yes" class="w-4 h-4 text-indigo-500 rounded border-gray-700">
+                            <span class="text-xs text-indigo-300 font-medium">⛺ Sleeping Over Friday Night (Oct 16)</span>
                         </label>
                         <label class="inline-flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" name="sleep17" value="Yes" class="w-4 h-4 text-indigo-600 rounded">
-                            <span class="text-xs text-gray-300">Sleeping over Saturday Night (Oct 17)</span>
+                            <input type="checkbox" name="sleep17" value="Yes" class="w-4 h-4 text-indigo-500 rounded border-gray-700">
+                            <span class="text-xs text-indigo-300 font-medium">⛺ Sleeping Over Saturday Night (Oct 17)</span>
                         </label>
                     </div>
                 </div>
 
                 <!-- Dynamic Daily Food Fields -->
                 <div class="space-y-4 pt-4 border-t border-gray-800">
-                    <h3 class="text-lg font-bold text-feast-gold">Food Contributions per Day</h3>
+                    <h3 class="text-sm font-bold text-feast-gold uppercase tracking-wider">Food & Drink Contributions per Day</h3>
                     
                     <!-- Oct 16 Food -->
-                    <div id="foodBlock16" class="hidden bg-feast-dark p-4 rounded-lg border border-gray-800 grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="md:col-span-1">
-                            <label class="block text-xs font-semibold text-gray-400 mb-1">Oct 16 Category</label>
-                            <input type="text" name="food16Category" placeholder="e.g. Main, Side, Drink" class="w-full bg-feast-card border border-gray-700 rounded px-3 py-1.5 text-xs text-white">
+                    <div id="foodBlock16" class="hidden bg-feast-dark/90 p-4 rounded-xl border border-red-500/40 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-bold text-red-400 uppercase mb-1">Oct 16 Category</label>
+                            <input type="text" name="food16Category" placeholder="e.g. Main Dish, Appetizer" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-xs font-semibold text-gray-400 mb-1">Oct 16 Dish / Item Details</label>
-                            <input type="text" name="food16Details" placeholder="e.g. Pulled Pork (5 lbs)" class="w-full bg-feast-card border border-gray-700 rounded px-3 py-1.5 text-xs text-white">
+                            <label class="block text-[11px] font-bold text-red-400 uppercase mb-1">Oct 16 Item Details</label>
+                            <input type="text" name="food16Details" placeholder="e.g. Smoked Pork Ribs & BBQ Sauce" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
                         </div>
                     </div>
 
                     <!-- Oct 17 Food -->
-                    <div id="foodBlock17" class="hidden bg-feast-dark p-4 rounded-lg border border-gray-800 grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="md:col-span-1">
-                            <label class="block text-xs font-semibold text-gray-400 mb-1">Oct 17 Category</label>
-                            <input type="text" name="food17Category" placeholder="e.g. Breakfast, Dessert" class="w-full bg-feast-card border border-gray-700 rounded px-3 py-1.5 text-xs text-white">
+                    <div id="foodBlock17" class="hidden bg-feast-dark/90 p-4 rounded-xl border border-blue-500/40 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-bold text-blue-400 uppercase mb-1">Oct 17 Category</label>
+                            <input type="text" name="food17Category" placeholder="e.g. Breakfast, Side" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-xs font-semibold text-gray-400 mb-1">Oct 17 Dish / Item Details</label>
-                            <input type="text" name="food17Details" placeholder="e.g. Pancakes & Syrup" class="w-full bg-feast-card border border-gray-700 rounded px-3 py-1.5 text-xs text-white">
+                            <label class="block text-[11px] font-bold text-blue-400 uppercase mb-1">Oct 17 Item Details</label>
+                            <input type="text" name="food17Details" placeholder="e.g. Eggs, Bacon, Pancakes" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
                         </div>
                     </div>
 
                     <!-- Oct 18 Food -->
-                    <div id="foodBlock18" class="hidden bg-feast-dark p-4 rounded-lg border border-gray-800 grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="md:col-span-1">
-                            <label class="block text-xs font-semibold text-gray-400 mb-1">Oct 18 Category</label>
-                            <input type="text" name="food18Category" placeholder="e.g. Snack, Utensils" class="w-full bg-feast-card border border-gray-700 rounded px-3 py-1.5 text-xs text-white">
+                    <div id="foodBlock18" class="hidden bg-feast-dark/90 p-4 rounded-xl border border-yellow-500/40 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-[11px] font-bold text-yellow-400 uppercase mb-1">Oct 18 Category</label>
+                            <input type="text" name="food18Category" placeholder="e.g. Dessert, Beverage" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
                         </div>
                         <div class="md:col-span-2">
-                            <label class="block text-xs font-semibold text-gray-400 mb-1">Oct 18 Dish / Item Details</label>
-                            <input type="text" name="food18Details" placeholder="e.g. Potato Chips & Dip" class="w-full bg-feast-card border border-gray-700 rounded px-3 py-1.5 text-xs text-white">
+                            <label class="block text-[11px] font-bold text-yellow-400 uppercase mb-1">Oct 18 Item Details</label>
+                            <input type="text" name="food18Details" placeholder="e.g. Apple Pie & Vanilla Ice Cream" class="w-full bg-feast-card border border-gray-700 rounded-lg px-3 py-2 text-xs text-white">
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-feast-gold hover:bg-yellow-500 text-feast-dark font-extrabold py-3.5 rounded-lg transition duration-200 shadow-lg uppercase tracking-wide">
-                    Submit / Update Entry
+                <button type="submit" class="w-full bg-gradient-to-r from-red-600 via-red-500 to-blue-700 hover:from-red-500 hover:to-blue-600 text-white font-black py-4 rounded-xl transition duration-200 shadow-xl uppercase tracking-widest border border-feast-gold/40">
+                    ★ Submit / Update Entry ★
                 </button>
             </form>
         </div>
 
-        <!-- Roster Table Section -->
-        <div class="bg-feast-card p-6 md:p-8 rounded-2xl border border-gray-800 shadow-2xl">
-            <h2 class="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-2 flex justify-between items-center">
-                <span>Master Event Roster</span>
-                <button onclick="fetchRoster()" class="text-xs bg-feast-dark hover:bg-gray-800 text-gray-300 border border-gray-700 px-3 py-1 rounded">Refresh</button>
-            </h2>
+        <!-- Patriotic Roster Table Section -->
+        <div class="bg-feast-card/95 p-6 md:p-8 rounded-2xl border-2 border-feast-gold/30 shadow-2xl backdrop-blur-md relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-white to-red-600"></div>
+
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b border-gray-700/80 pb-3">
+                <h2 class="text-2xl font-black text-feast-gold uppercase tracking-wide flex items-center space-x-2">
+                    <span>★ Event Attendance & Contribution Roster</span>
+                </h2>
+                <button onclick="fetchRoster()" class="text-xs bg-feast-dark hover:bg-gray-800 text-feast-gold border border-feast-gold/40 px-4 py-2 rounded-lg font-bold transition">
+                    ↻ Refresh Roster
+                </button>
+            </div>
 
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse min-w-[700px]">
                     <thead>
-                        <tr class="bg-feast-dark border-b border-gray-700 text-xs text-feast-gold uppercase">
-                            <th class="p-3">Attendee</th>
-                            <th class="p-3">Friday, Oct 16</th>
-                            <th class="p-3">Saturday, Oct 17</th>
-                            <th class="p-3">Sunday, Oct 18</th>
+                        <tr class="bg-feast-dark/90 border-b-2 border-feast-gold/40 text-xs text-feast-gold uppercase tracking-wider">
+                            <th class="p-4 rounded-tl-lg">Attendee Name</th>
+                            <th class="p-4">Friday (Oct 16)</th>
+                            <th class="p-4">Saturday (Oct 17)</th>
+                            <th class="p-4 rounded-tr-lg">Sunday (Oct 18)</th>
                         </tr>
                     </thead>
                     <tbody id="rosterTableBody" class="divide-y divide-gray-800 text-sm">
                         <tr>
-                            <td colspan="4" class="text-center py-8 text-gray-400">Loading roster data...</td>
+                            <td colspan="4" class="text-center py-10 text-gray-400">Loading roster entries...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -193,13 +245,13 @@
                 renderTableRoster(data);
             } catch (error) {
                 console.error('Error fetching roster:', error);
-                rosterTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-red-500">Error loading roster. Verify script deployment.</td></tr>';
+                rosterTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-10 text-red-400 font-semibold">Error loading roster. Check Google Script setup.</td></tr>';
             }
         }
 
         function renderTableRoster(data) {
             if (!data || data.length === 0) {
-                rosterTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-gray-500">No sign-ups found yet.</td></tr>';
+                rosterTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-10 text-gray-400">No RSVP submissions yet.</td></tr>';
                 return;
             }
 
@@ -210,7 +262,7 @@
             );
 
             if (activeData.length === 0) {
-                rosterTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-gray-500">No attendees signed up as attending.</td></tr>';
+                rosterTableBody.innerHTML = '<tr><td colspan="4" class="text-center py-10 text-gray-400">No active attendees registered as attending.</td></tr>';
                 return;
             }
 
@@ -228,24 +280,26 @@
                     const details = item[detKey] ? String(item[detKey]).trim() : '';
 
                     return `
-                        <div class="space-y-1">
-                            <span class="inline-block text-[10px] bg-green-900/60 text-green-300 border border-green-700 px-1.5 py-0.5 rounded font-semibold">Attending</span>
-                            ${isSleeping ? '<span class="inline-block text-[10px] bg-indigo-900/60 text-indigo-300 border border-indigo-700 px-1.5 py-0.5 rounded font-semibold">⛺ Overnight</span>' : ''}
+                        <div class="space-y-1.5">
+                            <div class="flex flex-wrap gap-1">
+                                <span class="inline-block text-[10px] bg-emerald-900/80 text-emerald-300 border border-emerald-600/60 px-2 py-0.5 rounded font-bold uppercase">Attending</span>
+                                ${isSleeping ? '<span class="inline-block text-[10px] bg-indigo-900/80 text-indigo-200 border border-indigo-600/60 px-2 py-0.5 rounded font-bold uppercase">⛺ Overnight</span>' : ''}
+                            </div>
                             ${details ? `
-                                <div class="text-xs pt-1">
-                                    <strong class="text-feast-gold">${category ? category + ':' : 'Food:'}</strong> ${details}
+                                <div class="text-xs pt-1 border-t border-gray-800/80">
+                                    <strong class="text-feast-gold uppercase text-[11px]">${category ? category + ':' : 'Item:'}</strong> <span class="text-gray-200">${details}</span>
                                 </div>
-                            ` : '<div class="text-[11px] text-gray-500 italic">No food listed</div>'}
+                            ` : '<div class="text-[11px] text-gray-500 italic">No food item listed</div>'}
                         </div>
                     `;
                 };
 
                 return `
-                    <tr class="hover:bg-gray-800/40 transition">
-                        <td class="p-3 font-bold text-white border-b border-gray-800 align-top">${item.name}</td>
-                        <td class="p-3 border-b border-gray-800 align-top">${renderDayCell('Oct 16', 'sleep16', 'food16Category', 'food16Details')}</td>
-                        <td class="p-3 border-b border-gray-800 align-top">${renderDayCell('Oct 17', 'sleep17', 'food17Category', 'food17Details')}</td>
-                        <td class="p-3 border-b border-gray-800 align-top">${renderDayCell('Oct 18', '', 'food18Category', 'food18Details')}</td>
+                    <tr class="hover:bg-gray-800/50 transition">
+                        <td class="p-4 font-bold text-white border-b border-gray-800/80 align-top">${item.name}</td>
+                        <td class="p-4 border-b border-gray-800/80 align-top">${renderDayCell('Oct 16', 'sleep16', 'food16Category', 'food16Details')}</td>
+                        <td class="p-4 border-b border-gray-800/80 align-top">${renderDayCell('Oct 17', 'sleep17', 'food17Category', 'food17Details')}</td>
+                        <td class="p-4 border-b border-gray-800/80 align-top">${renderDayCell('Oct 18', '', 'food18Category', 'food18Details')}</td>
                     </tr>
                 `;
             }).join('');
@@ -255,7 +309,7 @@
             e.preventDefault();
             const submitBtn = form.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
-            submitBtn.innerText = 'Saving...';
+            submitBtn.innerText = '★ Submitting Entry... ★';
 
             const formData = new FormData(form);
             const data = {};
@@ -291,14 +345,14 @@
                 setTimeout(() => {
                     fetchRoster();
                     submitBtn.disabled = false;
-                    submitBtn.innerText = 'Submit / Update Entry';
+                    submitBtn.innerText = '★ Submit / Update Entry ★';
                 }, 2000);
 
             } catch (error) {
                 console.error('Error submitting RSVP:', error);
                 alert('Could not submit RSVP. Please try again.');
                 submitBtn.disabled = false;
-                submitBtn.innerText = 'Submit / Update Entry';
+                submitBtn.innerText = '★ Submit / Update Entry ★';
             }
         });
 
