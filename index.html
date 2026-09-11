@@ -183,16 +183,16 @@
         </footer>
     </div>
 
-    <script>
-        // REPLACE WITH YOUR ACTUAL GOOGLE APPS SCRIPT WEB APP URL
-        const SCRIPT_URL = https://script.google.com/macros/s/AKfycbwps6a6et7qsQ9pIYhZF2Lb2vzpnIabInD8nVBmibmIH_XmtbYpw7j6F2_CSMzijiEZ/exec;
+<script>
+        // YOUR LIVE GOOGLE APPS SCRIPT WEB APP URL:
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwps6a6et7qsQ9pIYhZF2Lb2vzpnIabInD8nVBmibmIH_XmtbYpw7j6F2_CSMzijiEZ/exec";
 
         const form = document.getElementById('rsvpForm');
         const rosterContainer = document.getElementById('rosterContainer');
 
         async function fetchRoster() {
             try {
-                const response = await fetch(SCRIPT_URL);
+                const response = await fetch(SCRIPT_URL, { redirect: "follow" });
                 const data = await response.json();
                 renderRosterByDay(data);
             } catch (error) {
@@ -273,10 +273,14 @@
             data.sleep16 = data.sleep16 ? 'Yes' : 'No';
             data.sleep17 = data.sleep17 ? 'Yes' : 'No';
 
+            // CONVERT TO URLSearchParams HERE TO PREVENT CORS ISSUES
+            const searchParams = new URLSearchParams();
+            Object.keys(data).forEach(key => searchParams.append(key, data[key]));
+
             try {
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    body: JSON.stringify(data),
+                    body: searchParams,
                 });
                 form.reset();
                 fetchRoster();
