@@ -96,24 +96,24 @@
                 <div class="space-y-3 pt-2">
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">Select Days Attending</label>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-slate-800 hover:border-rose-500 cursor-pointer transition">
-                            <input type="checkbox" name="days" value="Oct 16" class="day-checkbox w-5 h-5 text-rose-600 rounded border-slate-700 focus:ring-0">
+                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-slate-800 hover:border-rose-500 cursor-pointer transition select-none">
+                            <input type="checkbox" name="days" value="Oct 16" onchange="syncDayBlocks()" class="day-checkbox w-5 h-5 text-rose-600 rounded border-slate-700 focus:ring-0 cursor-pointer">
                             <div>
                                 <span class="text-xs sm:text-sm font-bold text-white block">Friday, Oct 16</span>
                                 <span class="text-[10px] text-slate-400">Arrival, Dinner & Movie</span>
                             </div>
                         </label>
 
-                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-slate-800 hover:border-rose-500 cursor-pointer transition">
-                            <input type="checkbox" name="days" value="Oct 17" class="day-checkbox w-5 h-5 text-rose-600 rounded border-slate-700 focus:ring-0">
+                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-slate-800 hover:border-rose-500 cursor-pointer transition select-none">
+                            <input type="checkbox" name="days" value="Oct 17" onchange="syncDayBlocks()" class="day-checkbox w-5 h-5 text-rose-600 rounded border-slate-700 focus:ring-0 cursor-pointer">
                             <div>
                                 <span class="text-xs sm:text-sm font-bold text-white block">Saturday, Oct 17</span>
                                 <span class="text-[10px] text-rose-400 font-bold">🔥 THE FEAST 🔥</span>
                             </div>
                         </label>
 
-                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-slate-800 hover:border-blue-500 cursor-pointer transition">
-                            <input type="checkbox" name="days" value="Oct 18" class="day-checkbox w-5 h-5 text-blue-600 rounded border-slate-700 focus:ring-0">
+                        <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-slate-800 hover:border-blue-500 cursor-pointer transition select-none">
+                            <input type="checkbox" name="days" value="Oct 18" onchange="syncDayBlocks()" class="day-checkbox w-5 h-5 text-blue-600 rounded border-slate-700 focus:ring-0 cursor-pointer">
                             <div>
                                 <span class="text-xs sm:text-sm font-bold text-white block">Sunday, Oct 18</span>
                                 <span class="text-[10px] text-slate-400">Breakfast & Chill</span>
@@ -123,12 +123,12 @@
 
                     <!-- Overnight Stay Options -->
                     <div class="flex flex-col sm:flex-row gap-3 sm:gap-6 pt-2 px-1">
-                        <label class="inline-flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" name="sleep16" value="Yes" class="w-4 h-4 text-indigo-500 rounded border-slate-700">
+                        <label class="inline-flex items-center space-x-2 cursor-pointer select-none">
+                            <input type="checkbox" name="sleep16" value="Yes" class="w-4 h-4 text-indigo-500 rounded border-slate-700 cursor-pointer">
                             <span class="text-xs text-indigo-300 font-medium">⛺ Sleeping Over Friday Night (Oct 16)</span>
                         </label>
-                        <label class="inline-flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" name="sleep17" value="Yes" class="w-4 h-4 text-indigo-500 rounded border-slate-700">
+                        <label class="inline-flex items-center space-x-2 cursor-pointer select-none">
+                            <input type="checkbox" name="sleep17" value="Yes" class="w-4 h-4 text-indigo-500 rounded border-slate-700 cursor-pointer">
                             <span class="text-xs text-indigo-300 font-medium">⛺ Sleeping Over Saturday Night (Oct 17)</span>
                         </label>
                     </div>
@@ -147,20 +147,20 @@
                         <div>
                             <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Friday Night Snacks / Drinks (Select Multiple)</label>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
-                                    <input type="checkbox" name="food16Category" value="Late Night Snacks" class="rounded border-slate-700 text-rose-600">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer select-none">
+                                    <input type="checkbox" name="food16Category" value="Late Night Snacks" class="rounded border-slate-700 text-rose-600 cursor-pointer">
                                     <span class="text-slate-300">Late Night Snacks</span>
                                 </label>
-                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
-                                    <input type="checkbox" name="food16Category" value="Pizza / Wings" class="rounded border-slate-700 text-rose-600">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer select-none">
+                                    <input type="checkbox" name="food16Category" value="Pizza / Wings" class="rounded border-slate-700 text-rose-600 cursor-pointer">
                                     <span class="text-slate-300">Pizza / Wings</span>
                                 </label>
-                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
-                                    <input type="checkbox" name="food16Category" value="Bourbon / Drinks" class="rounded border-slate-700 text-rose-600">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer select-none">
+                                    <input type="checkbox" name="food16Category" value="Bourbon / Drinks" class="rounded border-slate-700 text-rose-600 cursor-pointer">
                                     <span class="text-slate-300">Bourbon / Drinks</span>
                                 </label>
-                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
-                                    <input type="checkbox" name="food16Category" value="Beer / Chasers" class="rounded border-slate-700 text-rose-600">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer select-none">
+                                    <input type="checkbox" name="food16Category" value="Beer / Chasers" class="rounded border-slate-700 text-rose-600 cursor-pointer">
                                     <span class="text-slate-300">Beer / Chasers</span>
                                 </label>
                             </div>
@@ -171,29 +171,29 @@
                     <div id="foodBlock17" class="hidden bg-feast-dark p-4 rounded-xl border border-rose-800/80 space-y-3">
                         <div>
                             <label class="block text-xs font-bold text-rose-300 uppercase mb-1.5">Oct 17 Feast Categories (Select Multiple)</label>
-                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
-                                    <input type="checkbox" name="food17Category" value="Main Meat" class="rounded border-slate-700 text-rose-600">
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer select-none">
+                                    <input type="checkbox" name="food17Category" value="Main Meat" class="rounded border-slate-700 text-rose-600 cursor-pointer">
                                     <span class="text-slate-300">Main Meat</span>
                                 </label>
-                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
-                                    <input type="checkbox" name="food17Category" value="Side Dish / BBQ" class="rounded border-slate-700 text-rose-600">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer select-none">
+                                    <input type="checkbox" name="food17Category" value="Side Dish / BBQ" class="rounded border-slate-700 text-rose-600 cursor-pointer">
                                     <span class="text-slate-300">Side Dish / BBQ</span>
                                 </label>
-                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
-                                    <input type="checkbox" name="food17Category" value="Dessert" class="rounded border-slate-700 text-rose-600">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer select-none">
+                                    <input type="checkbox" name="food17Category" value="Dessert" class="rounded border-slate-700 text-rose-600 cursor-pointer">
                                     <span class="text-slate-300">Dessert</span>
                                 </label>
-                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
-                                    <input type="checkbox" name="food17Category" value="Bourbon / Whiskey" class="rounded border-slate-700 text-rose-600">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer select-none">
+                                    <input type="checkbox" name="food17Category" value="Bourbon / Whiskey" class="rounded border-slate-700 text-rose-600 cursor-pointer">
                                     <span class="text-slate-300">Bourbon / Whiskey</span>
                                 </label>
-                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
-                                    <input type="checkbox" name="food17Category" value="Craft Beer" class="rounded border-slate-700 text-rose-600">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer select-none">
+                                    <input type="checkbox" name="food17Category" value="Craft Beer" class="rounded border-slate-700 text-rose-600 cursor-pointer">
                                     <span class="text-slate-300">Craft Beer</span>
                                 </label>
-                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
-                                    <input type="checkbox" name="food17Category" value="Cigars" class="rounded border-slate-700 text-rose-600">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer select-none">
+                                    <input type="checkbox" name="food17Category" value="Cigars" class="rounded border-slate-700 text-rose-600 cursor-pointer">
                                     <span class="text-slate-300">Cigars</span>
                                 </label>
                             </div>
@@ -209,21 +209,21 @@
                     <div id="foodBlock18" class="hidden bg-feast-dark p-4 rounded-xl border border-blue-900/60 space-y-3">
                         <div>
                             <label class="block text-xs font-bold text-blue-400 uppercase mb-1.5">Oct 18 Breakfast Categories (Select Multiple)</label>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
-                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
-                                    <input type="checkbox" name="food18Category" value="Breakfast Meat" class="rounded border-slate-700 text-blue-600">
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer select-none">
+                                    <input type="checkbox" name="food18Category" value="Breakfast Meat" class="rounded border-slate-700 text-blue-600 cursor-pointer">
                                     <span class="text-slate-300">Breakfast Meat</span>
                                 </label>
-                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
-                                    <input type="checkbox" name="food18Category" value="Eggs / Casserole" class="rounded border-slate-700 text-blue-600">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer select-none">
+                                    <input type="checkbox" name="food18Category" value="Eggs / Casserole" class="rounded border-slate-700 text-blue-600 cursor-pointer">
                                     <span class="text-slate-300">Eggs / Casserole</span>
                                 </label>
-                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
-                                    <input type="checkbox" name="food18Category" value="Bread / Bagels" class="rounded border-slate-700 text-blue-600">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer select-none">
+                                    <input type="checkbox" name="food18Category" value="Bread / Bagels" class="rounded border-slate-700 text-blue-600 cursor-pointer">
                                     <span class="text-slate-300">Bread / Bagels</span>
                                 </label>
-                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
-                                    <input type="checkbox" name="food18Category" value="Coffee / Juice" class="rounded border-slate-700 text-blue-600">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer select-none">
+                                    <input type="checkbox" name="food18Category" value="Coffee / Juice" class="rounded border-slate-700 text-blue-600 cursor-pointer">
                                     <span class="text-slate-300">Coffee / Juice</span>
                                 </label>
                             </div>
@@ -236,7 +236,7 @@
                     </div>
                 </div>
 
-                <!-- Solid Red Submit Button -->
+                <!-- Submit Button -->
                 <button type="submit" class="w-full bg-rose-700 hover:bg-rose-600 text-white font-black py-3.5 rounded-xl transition duration-200 shadow-lg uppercase tracking-wider text-xs sm:text-sm border border-rose-500/50 mt-4">
                     ★ Submit / Update Entry ★
                 </button>
@@ -290,10 +290,10 @@
         const lookupStatus = document.getElementById('lookupStatus');
         const rosterTableBody = document.getElementById('rosterTableBody');
         const rosterMobileView = document.getElementById('rosterMobileView');
-        const dayCheckboxes = document.querySelectorAll('.day-checkbox');
 
         function syncDayBlocks() {
-            dayCheckboxes.forEach(cb => {
+            const checkboxes = document.querySelectorAll('.day-checkbox');
+            checkboxes.forEach(cb => {
                 let blockId = '';
                 if (cb.value === 'Oct 16') blockId = 'foodBlock16';
                 if (cb.value === 'Oct 17') blockId = 'foodBlock17';
@@ -305,8 +305,6 @@
                 }
             });
         }
-
-        dayCheckboxes.forEach(cb => cb.addEventListener('change', syncDayBlocks));
 
         phoneInput.addEventListener('input', (e) => {
             const raw = e.target.value.replace(/\D/g, '');
@@ -359,7 +357,8 @@
             form.querySelector('[name="attending"]').value = data.attending || 'Yes';
 
             const daysAttending = String(data.days || '');
-            dayCheckboxes.forEach(cb => {
+            const checkboxes = document.querySelectorAll('.day-checkbox');
+            checkboxes.forEach(cb => {
                 cb.checked = daysAttending.includes(cb.value);
             });
 
