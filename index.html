@@ -56,7 +56,7 @@
                 <h2 class="text-xl sm:text-2xl font-black text-white uppercase tracking-wide">
                     ★ RSVP / Edit Registration
                 </h2>
-                <p class="text-[11px] text-slate-400 mt-0.5">Enter your phone number to load existing details or start a new RSVP.</p>
+                <p class="text-[11px] text-slate-400 mt-0.5">Enter your cell phone number to load existing details or start a new RSVP.</p>
             </div>
             
             <form id="rsvpForm" class="space-y-5">
@@ -100,7 +100,7 @@
                             <input type="checkbox" name="days" value="Oct 16" class="day-checkbox w-5 h-5 text-rose-600 rounded border-slate-700 focus:ring-0">
                             <div>
                                 <span class="text-xs sm:text-sm font-bold text-white block">Friday, Oct 16</span>
-                                <span class="text-[10px] text-slate-400">Arrival & Movie (dinner supplied)</span>
+                                <span class="text-[10px] text-slate-400">Arrival, Dinner & Movie</span>
                             </div>
                         </label>
 
@@ -137,49 +137,100 @@
                 <!-- Dynamic Daily Options -->
                 <div class="space-y-4 pt-3 border-t border-slate-800">
                     
-                    <!-- Oct 16 Movie Suggestion -->
-                    <div id="foodBlock16" class="hidden bg-feast-dark p-3.5 rounded-xl border border-rose-900/60">
-                        <label class="block text-[10px] font-bold text-rose-400 uppercase mb-1">🎬 Friday Night Movie Choice</label>
-                        <input type="text" name="food16Details" placeholder="What movie do you want to watch Friday night?" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500">
-                        <input type="hidden" name="food16Category" value="Movie Choice">
+                    <!-- Oct 16 Block: Movie Suggestion + Optional Categories -->
+                    <div id="foodBlock16" class="hidden bg-feast-dark p-4 rounded-xl border border-rose-900/60 space-y-3">
+                        <div>
+                            <label class="block text-xs font-bold text-rose-400 uppercase mb-1">🎬 Friday Night Movie Choice</label>
+                            <input type="text" name="food16Details" placeholder="What movie do you want to watch Friday night?" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Friday Night Snacks / Drinks (Select Multiple)</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
+                                    <input type="checkbox" name="food16Category" value="Late Night Snacks" class="rounded border-slate-700 text-rose-600">
+                                    <span class="text-slate-300">Late Night Snacks</span>
+                                </label>
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
+                                    <input type="checkbox" name="food16Category" value="Pizza / Wings" class="rounded border-slate-700 text-rose-600">
+                                    <span class="text-slate-300">Pizza / Wings</span>
+                                </label>
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
+                                    <input type="checkbox" name="food16Category" value="Bourbon / Drinks" class="rounded border-slate-700 text-rose-600">
+                                    <span class="text-slate-300">Bourbon / Drinks</span>
+                                </label>
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
+                                    <input type="checkbox" name="food16Category" value="Beer / Chasers" class="rounded border-slate-700 text-rose-600">
+                                    <span class="text-slate-300">Beer / Chasers</span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Oct 17 Food -->
-                    <div id="foodBlock17" class="hidden bg-feast-dark p-3.5 rounded-xl border border-rose-800/80 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <!-- Oct 17 Block: Multi-Category + Details -->
+                    <div id="foodBlock17" class="hidden bg-feast-dark p-4 rounded-xl border border-rose-800/80 space-y-3">
                         <div>
-                            <label class="block text-[10px] font-bold text-rose-300 uppercase mb-1">Oct 17 Category</label>
-                            <select name="food17Category" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500">
-                                <option value="">Select Category...</option>
-                                <option value="Main / Feast Meat">Main / Feast Meat</option>
-                                <option value="Side Dish / BBQ">Side Dish / BBQ</option>
-                                <option value="Dessert">Dessert</option>
-                                <option value="Bourbon / Whiskey">Bourbon / Whiskey</option>
-                                <option value="Craft Beer">Craft Beer</option>
-                                <option value="Cigars / Freedom Reserve">Cigars / Freedom Reserve</option>
-                                <option value="Ice / Charcoal / Wood">Ice / Charcoal / Wood</option>
-                            </select>
+                            <label class="block text-xs font-bold text-rose-300 uppercase mb-1.5">Oct 17 Feast Categories (Select Multiple)</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
+                                    <input type="checkbox" name="food17Category" value="Main Meat" class="rounded border-slate-700 text-rose-600">
+                                    <span class="text-slate-300">Main Meat</span>
+                                </label>
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
+                                    <input type="checkbox" name="food17Category" value="Side Dish / BBQ" class="rounded border-slate-700 text-rose-600">
+                                    <span class="text-slate-300">Side Dish / BBQ</span>
+                                </label>
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
+                                    <input type="checkbox" name="food17Category" value="Dessert" class="rounded border-slate-700 text-rose-600">
+                                    <span class="text-slate-300">Dessert</span>
+                                </label>
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
+                                    <input type="checkbox" name="food17Category" value="Bourbon / Whiskey" class="rounded border-slate-700 text-rose-600">
+                                    <span class="text-slate-300">Bourbon / Whiskey</span>
+                                </label>
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
+                                    <input type="checkbox" name="food17Category" value="Craft Beer" class="rounded border-slate-700 text-rose-600">
+                                    <span class="text-slate-300">Craft Beer</span>
+                                </label>
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
+                                    <input type="checkbox" name="food17Category" value="Cigars" class="rounded border-slate-700 text-rose-600">
+                                    <span class="text-slate-300">Cigars</span>
+                                </label>
+                            </div>
                         </div>
-                        <div class="sm:col-span-2">
-                            <label class="block text-[10px] font-bold text-rose-300 uppercase mb-1">Oct 17 Dish / Item Details</label>
-                            <input type="text" name="food17Details" placeholder="e.g. Smoked Pork Ribs & BBQ Sauce" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500">
+
+                        <div>
+                            <label class="block text-[10px] font-bold text-rose-300 uppercase mb-1">Oct 17 Item Details</label>
+                            <input type="text" name="food17Details" placeholder="e.g. Smoked Pork Ribs & Blanton's Bourbon" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500">
                         </div>
                     </div>
 
-                    <!-- Oct 18 Food -->
-                    <div id="foodBlock18" class="hidden bg-feast-dark p-3.5 rounded-xl border border-blue-900/60 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <!-- Oct 18 Block: Multi-Category + Details -->
+                    <div id="foodBlock18" class="hidden bg-feast-dark p-4 rounded-xl border border-blue-900/60 space-y-3">
                         <div>
-                            <label class="block text-[10px] font-bold text-blue-400 uppercase mb-1">Oct 18 Category</label>
-                            <select name="food18Category" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
-                                <option value="">Select Category...</option>
-                                <option value="Breakfast Meat">Breakfast Meat</option>
-                                <option value="Eggs / Casserole">Eggs / Casserole</option>
-                                <option value="Bread / Bagels / Rolls">Bread / Bagels / Rolls</option>
-                                <option value="Coffee / Juice">Coffee / Juice</option>
-                                <option value="Pack Up / Cleanup Supplies">Pack Up / Cleanup Supplies</option>
-                            </select>
+                            <label class="block text-xs font-bold text-blue-400 uppercase mb-1.5">Oct 18 Breakfast Categories (Select Multiple)</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
+                                    <input type="checkbox" name="food18Category" value="Breakfast Meat" class="rounded border-slate-700 text-blue-600">
+                                    <span class="text-slate-300">Breakfast Meat</span>
+                                </label>
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
+                                    <input type="checkbox" name="food18Category" value="Eggs / Casserole" class="rounded border-slate-700 text-blue-600">
+                                    <span class="text-slate-300">Eggs / Casserole</span>
+                                </label>
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
+                                    <input type="checkbox" name="food18Category" value="Bread / Bagels" class="rounded border-slate-700 text-blue-600">
+                                    <span class="text-slate-300">Bread / Bagels</span>
+                                </label>
+                                <label class="flex items-center space-x-2 bg-feast-card p-2 rounded border border-slate-800 cursor-pointer">
+                                    <input type="checkbox" name="food18Category" value="Coffee / Juice" class="rounded border-slate-700 text-blue-600">
+                                    <span class="text-slate-300">Coffee / Juice</span>
+                                </label>
+                            </div>
                         </div>
-                        <div class="sm:col-span-2">
-                            <label class="block text-[10px] font-bold text-blue-400 uppercase mb-1">Oct 18 Dish / Item Details</label>
+
+                        <div>
+                            <label class="block text-[10px] font-bold text-blue-400 uppercase mb-1">Oct 18 Item Details</label>
                             <input type="text" name="food18Details" placeholder="e.g. 2 Packs Bacon & Box of Coffee" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500">
                         </div>
                     </div>
@@ -241,7 +292,6 @@
         const rosterMobileView = document.getElementById('rosterMobileView');
         const dayCheckboxes = document.querySelectorAll('.day-checkbox');
 
-        // Toggle visibility of day option blocks
         function syncDayBlocks() {
             dayCheckboxes.forEach(cb => {
                 let blockId = '';
@@ -258,7 +308,6 @@
 
         dayCheckboxes.forEach(cb => cb.addEventListener('change', syncDayBlocks));
 
-        // Auto-lookup when 10 digits are typed
         phoneInput.addEventListener('input', (e) => {
             const raw = e.target.value.replace(/\D/g, '');
             if (raw.length === 10) {
@@ -287,7 +336,7 @@
                 }
             } catch (err) {
                 console.error(err);
-                showLookupStatus('Error looking up phone number. You can still complete the form manually.', 'text-rose-400');
+                showLookupStatus('Error looking up phone number.', 'text-rose-400');
             }
         }
 
@@ -295,6 +344,14 @@
             lookupStatus.className = `text-xs font-semibold px-1 ${textClass}`;
             lookupStatus.innerText = msg;
             lookupStatus.classList.remove('hidden');
+        }
+
+        function setCheckboxesByName(name, valuesString) {
+            const vals = String(valuesString || '').split(',').map(s => s.trim());
+            const boxes = form.querySelectorAll(`[name="${name}"]`);
+            boxes.forEach(cb => {
+                cb.checked = vals.includes(cb.value);
+            });
         }
 
         function populateForm(data) {
@@ -310,15 +367,16 @@
             form.querySelector('[name="sleep17"]').checked = String(data.sleep17).toLowerCase() === 'yes';
 
             form.querySelector('[name="food16Details"]').value = data.food16Details || '';
-            form.querySelector('[name="food17Category"]').value = data.food17Category || '';
             form.querySelector('[name="food17Details"]').value = data.food17Details || '';
-            form.querySelector('[name="food18Category"]').value = data.food18Category || '';
             form.querySelector('[name="food18Details"]').value = data.food18Details || '';
+
+            setCheckboxesByName('food16Category', data.food16Category);
+            setCheckboxesByName('food17Category', data.food17Category);
+            setCheckboxesByName('food18Category', data.food18Category);
 
             syncDayBlocks();
         }
 
-        // Roster fetch with retry mechanism
         async function fetchRoster(retries = 2) {
             try {
                 const response = await fetch(`${SCRIPT_URL}?t=${Date.now()}`, { redirect: 'follow' });
@@ -358,9 +416,10 @@
                 return;
             }
 
-            // Render Table (Desktop)
+            // Desktop Table View
             rosterTableBody.innerHTML = activeData.map(item => {
                 const days = String(item.days || '');
+                
                 const renderCell = (dayTag, sleepKey, catKey, detKey) => {
                     if (!days.includes(dayTag)) return '<span class="text-slate-600 text-xs italic">Not attending</span>';
                     const isSleeping = String(item[sleepKey] || '').toLowerCase() === 'yes';
@@ -373,12 +432,13 @@
                                 <span class="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700/60 px-1.5 py-0.5 rounded font-bold uppercase">Attending</span>
                                 ${isSleeping ? '<span class="text-[10px] bg-indigo-950 text-indigo-200 border border-indigo-700/60 px-1.5 py-0.5 rounded font-bold uppercase">⛺ Overnight</span>' : ''}
                             </div>
+                            ${cat ? `<div class="text-[10px] text-rose-400 font-bold uppercase pt-1">Categories: ${cat}</div>` : ''}
                             ${det ? `
-                                <div class="text-xs pt-1">
-                                    <strong class="text-rose-400 uppercase text-[10px] block">${dayTag === 'Oct 16' ? '🎬 Movie Choice:' : (cat || 'Item:')}</strong>
+                                <div class="text-xs">
+                                    <strong class="text-slate-400 uppercase text-[9px] block">${dayTag === 'Oct 16' ? '🎬 Movie Suggestion:' : 'Item Details:'}</strong>
                                     <span class="text-slate-200">${det}</span>
                                 </div>
-                            ` : `<div class="text-[10px] text-slate-500 italic">${dayTag === 'Oct 16' ? 'No movie suggested' : 'No item specified'}</div>`}
+                            ` : (!cat ? `<div class="text-[10px] text-slate-500 italic">No items listed</div>` : '')}
                         </div>
                     `;
                 };
@@ -393,7 +453,7 @@
                 `;
             }).join('');
 
-            // Render Mobile Cards
+            // Mobile Card View
             rosterMobileView.innerHTML = activeData.map(item => {
                 const days = String(item.days || '');
                 const renderMobileDay = (title, dayTag, sleepKey, catKey, detKey) => {
@@ -408,11 +468,12 @@
                                 <span class="font-bold text-slate-200">${title}</span>
                                 ${isSleeping ? '<span class="text-[10px] text-indigo-300 font-medium">⛺ Overnight</span>' : ''}
                             </div>
+                            ${cat ? `<div class="text-[10px] text-rose-400 font-bold uppercase">${cat}</div>` : ''}
                             ${det ? `
                                 <div class="text-[11px] text-slate-300">
-                                    <span class="text-rose-400 font-semibold">${dayTag === 'Oct 16' ? '🎬 Movie: ' : (cat ? cat + ': ' : '')}</span>${det}
+                                    <span class="text-slate-400">${dayTag === 'Oct 16' ? '🎬 Movie: ' : 'Details: '}</span>${det}
                                 </div>
-                            ` : `<div class="text-[10px] text-slate-500 italic">No details specified</div>`}
+                            ` : ''}
                         </div>
                     `;
                 };
@@ -443,7 +504,7 @@
             const data = {};
 
             formData.forEach((value, key) => {
-                if (key === 'days') {
+                if (key === 'days' || key === 'food16Category' || key === 'food17Category' || key === 'food18Category') {
                     if (!data[key]) data[key] = [];
                     data[key].push(value);
                 } else {
