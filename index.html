@@ -11,11 +11,7 @@
                 extend: {
                     colors: {
                         'feast-dark': '#0b0f17',
-                        'feast-card': '#141c2b',
-                        'feast-red': '#dc2626',
-                        'feast-crimson': '#e11d48',
-                        'feast-blue': '#2563eb',
-                        'feast-steel': '#cbd5e1'
+                        'feast-card': '#141c2b'
                     }
                 }
             }
@@ -42,7 +38,7 @@
         <!-- Header Banner Section -->
         <div class="flex flex-col items-center">
             <div class="w-full max-w-xl overflow-hidden rounded-xl sm:rounded-2xl border border-rose-700/60 banner-shadow bg-feast-dark relative">
-                <img src="banner.JPG" alt="MANFEAST 2026 - Food, Fire & Freedom" class="w-full h-auto object-cover block mx-auto">
+                <img src="banner.JPG" alt="MANFEAST 2026" class="w-full h-auto object-cover block mx-auto">
             </div>
             
             <div class="mt-3 text-center">
@@ -57,13 +53,28 @@
             <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-600 via-slate-200 to-blue-600"></div>
             
             <div class="mb-5 border-b border-slate-800 pb-3">
-                <h2 class="text-xl sm:text-2xl font-black text-white uppercase tracking-wide flex items-center justify-between">
-                    <span>★ RSVP / Edit Registration</span>
+                <h2 class="text-xl sm:text-2xl font-black text-white uppercase tracking-wide">
+                    ★ RSVP / Edit Registration
                 </h2>
-                <p class="text-[11px] text-slate-400 mt-0.5">Enter your full name to submit or update an existing entry.</p>
+                <p class="text-[11px] text-slate-400 mt-0.5">Enter your phone number to load existing details or start a new RSVP.</p>
             </div>
             
             <form id="rsvpForm" class="space-y-5">
+                
+                <!-- Phone Lookup Bar -->
+                <div class="bg-feast-dark p-3 rounded-xl border border-rose-900/50 flex flex-col sm:flex-row gap-2 items-stretch">
+                    <div class="flex-1">
+                        <label class="block text-[10px] font-bold text-rose-400 uppercase tracking-wider mb-1">Cell Phone Number * (Key)</label>
+                        <input type="tel" id="phoneInput" name="phone" required placeholder="10-digit phone number" 
+                            class="w-full bg-feast-card border border-slate-700 rounded-lg px-3.5 py-2 text-sm text-white focus:outline-none focus:border-rose-500 transition shadow-inner">
+                    </div>
+                    <button type="button" id="lookupBtn" onclick="lookupUserByPhone()" class="sm:self-end bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs text-rose-300 font-bold px-4 py-2.5 rounded-lg transition">
+                        🔍 Find My RSVP
+                    </button>
+                </div>
+
+                <div id="lookupStatus" class="hidden text-xs font-semibold px-1"></div>
+
                 <!-- Name & Attending Status -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
@@ -89,7 +100,7 @@
                             <input type="checkbox" name="days" value="Oct 16" class="day-checkbox w-5 h-5 text-rose-600 rounded border-slate-700 focus:ring-0">
                             <div>
                                 <span class="text-xs sm:text-sm font-bold text-white block">Friday, Oct 16</span>
-                                <span class="text-[10px] text-slate-400">Movie & Arrival</span>
+                                <span class="text-[10px] text-slate-400">Arrival & Movie (dinner supplied)</span>
                             </div>
                         </label>
 
@@ -97,7 +108,7 @@
                             <input type="checkbox" name="days" value="Oct 17" class="day-checkbox w-5 h-5 text-rose-600 rounded border-slate-700 focus:ring-0">
                             <div>
                                 <span class="text-xs sm:text-sm font-bold text-white block">Saturday, Oct 17</span>
-                                <span class="text-[10px] text-rose-400 font-bold">🔥 THE FEAST DAY</span>
+                                <span class="text-[10px] text-rose-400 font-bold">🔥 THE FEAST 🔥</span>
                             </div>
                         </label>
 
@@ -105,7 +116,7 @@
                             <input type="checkbox" name="days" value="Oct 18" class="day-checkbox w-5 h-5 text-blue-600 rounded border-slate-700 focus:ring-0">
                             <div>
                                 <span class="text-xs sm:text-sm font-bold text-white block">Sunday, Oct 18</span>
-                                <span class="text-[10px] text-slate-400">Breakfast & Pack Up</span>
+                                <span class="text-[10px] text-slate-400">Breakfast & Chill</span>
                             </div>
                         </label>
                     </div>
@@ -126,7 +137,7 @@
                 <!-- Dynamic Daily Options -->
                 <div class="space-y-4 pt-3 border-t border-slate-800">
                     
-                    <!-- Oct 16 Movie Suggestion (Replaces Food for Friday) -->
+                    <!-- Oct 16 Movie Suggestion -->
                     <div id="foodBlock16" class="hidden bg-feast-dark p-3.5 rounded-xl border border-rose-900/60">
                         <label class="block text-[10px] font-bold text-rose-400 uppercase mb-1">🎬 Friday Night Movie Choice</label>
                         <input type="text" name="food16Details" placeholder="What movie do you want to watch Friday night?" class="w-full bg-feast-card border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-rose-500">
@@ -181,7 +192,7 @@
             </form>
         </div>
 
-        <!-- Roster Section -->
+        <!-- Master Roster Card -->
         <div class="bg-feast-card p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-slate-700/70 shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-slate-200 to-rose-600"></div>
 
@@ -194,12 +205,12 @@
                 </button>
             </div>
 
-            <!-- Mobile View (Stacked Cards) -->
+            <!-- Mobile View -->
             <div id="rosterMobileView" class="block md:hidden space-y-3">
                 <div class="text-center py-6 text-xs text-slate-400">Loading roster...</div>
             </div>
 
-            <!-- Desktop View (Table) -->
+            <!-- Desktop View -->
             <div class="hidden md:block overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
@@ -224,63 +235,111 @@
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz4uLEmNo047VUJ03SAISxchr4e9EXF7P7c-jAmNjQiqrWUBv1685a4ulT9H5qLvsnx/exec";
 
         const form = document.getElementById('rsvpForm');
+        const phoneInput = document.getElementById('phoneInput');
+        const lookupStatus = document.getElementById('lookupStatus');
         const rosterTableBody = document.getElementById('rosterTableBody');
         const rosterMobileView = document.getElementById('rosterMobileView');
         const dayCheckboxes = document.querySelectorAll('.day-checkbox');
 
-        // Dynamic Options Visibility Toggle
-        dayCheckboxes.forEach(cb => {
-            cb.addEventListener('change', () => {
-                const dayVal = cb.value;
+        // Toggle visibility of day option blocks
+        function syncDayBlocks() {
+            dayCheckboxes.forEach(cb => {
                 let blockId = '';
-                if (dayVal === 'Oct 16') blockId = 'foodBlock16';
-                if (dayVal === 'Oct 17') blockId = 'foodBlock17';
-                if (dayVal === 'Oct 18') blockId = 'foodBlock18';
+                if (cb.value === 'Oct 16') blockId = 'foodBlock16';
+                if (cb.value === 'Oct 17') blockId = 'foodBlock17';
+                if (cb.value === 'Oct 18') blockId = 'foodBlock18';
 
                 const block = document.getElementById(blockId);
                 if (block) {
-                    if (cb.checked) {
-                        block.classList.remove('hidden');
-                    } else {
-                        block.classList.add('hidden');
-                    }
+                    block.classList.toggle('hidden', !cb.checked);
                 }
             });
+        }
+
+        dayCheckboxes.forEach(cb => cb.addEventListener('change', syncDayBlocks));
+
+        // Auto-lookup when 10 digits are typed
+        phoneInput.addEventListener('input', (e) => {
+            const raw = e.target.value.replace(/\D/g, '');
+            if (raw.length === 10) {
+                lookupUserByPhone();
+            }
         });
 
-        // Robust Fetch Function with Automatic Mobile Retries and Cache Busting
+        async function lookupUserByPhone() {
+            const rawPhone = phoneInput.value.replace(/\D/g, '');
+            if (rawPhone.length < 10) {
+                showLookupStatus('Please enter a valid 10-digit phone number.', 'text-amber-400');
+                return;
+            }
+
+            showLookupStatus('Searching for existing registration...', 'text-slate-400');
+
+            try {
+                const response = await fetch(`${SCRIPT_URL}?action=getSingle&phone=${rawPhone}&t=${Date.now()}`);
+                const user = await response.json();
+
+                if (user && user.name) {
+                    populateForm(user);
+                    showLookupStatus(`✓ Found entry for ${user.name}. Details populated below!`, 'text-emerald-400');
+                } else {
+                    showLookupStatus('No previous entry found. Complete form to register as new!', 'text-blue-400');
+                }
+            } catch (err) {
+                console.error(err);
+                showLookupStatus('Error looking up phone number. You can still complete the form manually.', 'text-rose-400');
+            }
+        }
+
+        function showLookupStatus(msg, textClass) {
+            lookupStatus.className = `text-xs font-semibold px-1 ${textClass}`;
+            lookupStatus.innerText = msg;
+            lookupStatus.classList.remove('hidden');
+        }
+
+        function populateForm(data) {
+            form.querySelector('[name="name"]').value = data.name || '';
+            form.querySelector('[name="attending"]').value = data.attending || 'Yes';
+
+            const daysAttending = String(data.days || '');
+            dayCheckboxes.forEach(cb => {
+                cb.checked = daysAttending.includes(cb.value);
+            });
+
+            form.querySelector('[name="sleep16"]').checked = String(data.sleep16).toLowerCase() === 'yes';
+            form.querySelector('[name="sleep17"]').checked = String(data.sleep17).toLowerCase() === 'yes';
+
+            form.querySelector('[name="food16Details"]').value = data.food16Details || '';
+            form.querySelector('[name="food17Category"]').value = data.food17Category || '';
+            form.querySelector('[name="food17Details"]').value = data.food17Details || '';
+            form.querySelector('[name="food18Category"]').value = data.food18Category || '';
+            form.querySelector('[name="food18Details"]').value = data.food18Details || '';
+
+            syncDayBlocks();
+        }
+
+        // Roster fetch with retry mechanism
         async function fetchRoster(retries = 2) {
             try {
-                const cacheBusterUrl = `${SCRIPT_URL}?t=${Date.now()}`;
-                const response = await fetch(cacheBusterUrl, {
-                    method: 'GET',
-                    redirect: 'follow'
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
+                const response = await fetch(`${SCRIPT_URL}?t=${Date.now()}`, { redirect: 'follow' });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
                 renderRoster(data);
             } catch (error) {
-                console.error('Error fetching roster:', error);
-                
+                console.error('Fetch error:', error);
                 if (retries > 0) {
-                    console.log(`Retrying roster fetch... (${retries} attempts left)`);
                     setTimeout(() => fetchRoster(retries - 1), 1200);
                     return;
                 }
-
-                const errorHtml = '<div class="text-center py-6 text-xs text-rose-400 font-semibold">Unable to load roster. Tap "Refresh" or check mobile network.</div>';
-                rosterMobileView.innerHTML = errorHtml;
-                rosterTableBody.innerHTML = `<tr><td colspan="4">${errorHtml}</td></tr>`;
+                const errHtml = '<div class="text-center py-6 text-xs text-rose-400 font-semibold">Unable to load roster. Tap "Refresh".</div>';
+                rosterMobileView.innerHTML = errHtml;
+                rosterTableBody.innerHTML = `<tr><td colspan="4">${errHtml}</td></tr>`;
             }
         }
 
         function renderRoster(data) {
             if (!data || data.length === 0) {
-                const emptyHtml = '<div class="text-center py-6 text-xs text-slate-400">No RSVP submissions yet.</div>';
+                const emptyHtml = '<div class="text-center py-6 text-xs text-slate-400">No RSVP entries yet.</div>';
                 rosterMobileView.innerHTML = emptyHtml;
                 rosterTableBody.innerHTML = `<tr><td colspan="4">${emptyHtml}</td></tr>`;
                 return;
@@ -293,24 +352,20 @@
             );
 
             if (activeData.length === 0) {
-                const emptyHtml = '<div class="text-center py-6 text-xs text-slate-400">No attendees currently registered as attending.</div>';
+                const emptyHtml = '<div class="text-center py-6 text-xs text-slate-400">No registered attendees yet.</div>';
                 rosterMobileView.innerHTML = emptyHtml;
                 rosterTableBody.innerHTML = `<tr><td colspan="4">${emptyHtml}</td></tr>`;
                 return;
             }
 
-            // Desktop Table View
+            // Render Table (Desktop)
             rosterTableBody.innerHTML = activeData.map(item => {
-                const daysAttending = String(item.days || '');
-
-                const renderDayCell = (dayTag, sleepKey, catKey, detKey) => {
-                    if (!daysAttending.includes(dayTag)) {
-                        return '<span class="text-slate-600 text-xs italic">Not attending</span>';
-                    }
-
+                const days = String(item.days || '');
+                const renderCell = (dayTag, sleepKey, catKey, detKey) => {
+                    if (!days.includes(dayTag)) return '<span class="text-slate-600 text-xs italic">Not attending</span>';
                     const isSleeping = String(item[sleepKey] || '').toLowerCase() === 'yes';
-                    const category = item[catKey] ? String(item[catKey]).trim() : '';
-                    const details = item[detKey] ? String(item[detKey]).trim() : '';
+                    const cat = item[catKey] ? String(item[catKey]).trim() : '';
+                    const det = item[detKey] ? String(item[detKey]).trim() : '';
 
                     return `
                         <div class="space-y-1">
@@ -318,12 +373,12 @@
                                 <span class="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700/60 px-1.5 py-0.5 rounded font-bold uppercase">Attending</span>
                                 ${isSleeping ? '<span class="text-[10px] bg-indigo-950 text-indigo-200 border border-indigo-700/60 px-1.5 py-0.5 rounded font-bold uppercase">⛺ Overnight</span>' : ''}
                             </div>
-                            ${details ? `
+                            ${det ? `
                                 <div class="text-xs pt-1">
-                                    <strong class="text-rose-400 uppercase text-[10px] block">${dayTag === 'Oct 16' ? '🎬 Movie Choice:' : (category || 'Contribution:')}</strong>
-                                    <span class="text-slate-200">${details}</span>
+                                    <strong class="text-rose-400 uppercase text-[10px] block">${dayTag === 'Oct 16' ? '🎬 Movie Choice:' : (cat || 'Item:')}</strong>
+                                    <span class="text-slate-200">${det}</span>
                                 </div>
-                            ` : `<div class="text-[10px] text-slate-500 italic">${dayTag === 'Oct 16' ? 'No movie suggested' : 'No food item listed'}</div>`}
+                            ` : `<div class="text-[10px] text-slate-500 italic">${dayTag === 'Oct 16' ? 'No movie suggested' : 'No item specified'}</div>`}
                         </div>
                     `;
                 };
@@ -331,35 +386,33 @@
                 return `
                     <tr class="hover:bg-slate-800/40 transition">
                         <td class="p-3 font-bold text-white align-top border-b border-slate-800">${item.name}</td>
-                        <td class="p-3 align-top border-b border-slate-800">${renderDayCell('Oct 16', 'sleep16', 'food16Category', 'food16Details')}</td>
-                        <td class="p-3 align-top border-b border-slate-800">${renderDayCell('Oct 17', 'sleep17', 'food17Category', 'food17Details')}</td>
-                        <td class="p-3 align-top border-b border-slate-800">${renderDayCell('Oct 18', '', 'food18Category', 'food18Details')}</td>
+                        <td class="p-3 align-top border-b border-slate-800">${renderCell('Oct 16', 'sleep16', 'food16Category', 'food16Details')}</td>
+                        <td class="p-3 align-top border-b border-slate-800">${renderCell('Oct 17', 'sleep17', 'food17Category', 'food17Details')}</td>
+                        <td class="p-3 align-top border-b border-slate-800">${renderCell('Oct 18', '', 'food18Category', 'food18Details')}</td>
                     </tr>
                 `;
             }).join('');
 
-            // Mobile Card View
+            // Render Mobile Cards
             rosterMobileView.innerHTML = activeData.map(item => {
-                const daysAttending = String(item.days || '');
-
-                const renderMobileDay = (dayTitle, dayTag, sleepKey, catKey, detKey) => {
-                    if (!daysAttending.includes(dayTag)) return '';
-
+                const days = String(item.days || '');
+                const renderMobileDay = (title, dayTag, sleepKey, catKey, detKey) => {
+                    if (!days.includes(dayTag)) return '';
                     const isSleeping = String(item[sleepKey] || '').toLowerCase() === 'yes';
-                    const category = item[catKey] ? String(item[catKey]).trim() : '';
-                    const details = item[detKey] ? String(item[detKey]).trim() : '';
+                    const cat = item[catKey] ? String(item[catKey]).trim() : '';
+                    const det = item[detKey] ? String(item[detKey]).trim() : '';
 
                     return `
                         <div class="bg-feast-dark p-2.5 rounded-lg border border-slate-800 text-xs">
                             <div class="flex justify-between items-center mb-1">
-                                <span class="font-bold text-slate-200">${dayTitle}</span>
+                                <span class="font-bold text-slate-200">${title}</span>
                                 ${isSleeping ? '<span class="text-[10px] text-indigo-300 font-medium">⛺ Overnight</span>' : ''}
                             </div>
-                            ${details ? `
+                            ${det ? `
                                 <div class="text-[11px] text-slate-300">
-                                    <span class="text-rose-400 font-semibold">${dayTag === 'Oct 16' ? '🎬 Movie Choice: ' : (category ? category + ': ' : '')}</span>${details}
+                                    <span class="text-rose-400 font-semibold">${dayTag === 'Oct 16' ? '🎬 Movie: ' : (cat ? cat + ': ' : '')}</span>${det}
                                 </div>
-                            ` : `<div class="text-[10px] text-slate-500 italic">${dayTag === 'Oct 16' ? 'No movie suggested' : 'No food item specified'}</div>`}
+                            ` : `<div class="text-[10px] text-slate-500 italic">No details specified</div>`}
                         </div>
                     `;
                 };
@@ -384,7 +437,7 @@
             e.preventDefault();
             const submitBtn = form.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
-            submitBtn.innerText = '★ Submitting... ★';
+            submitBtn.innerText = '★ Saving... ★';
 
             const formData = new FormData(form);
             const data = {};
@@ -398,6 +451,7 @@
                 }
             });
 
+            data.phone = data.phone.replace(/\D/g, '');
             data.sleep16 = form.querySelector('[name="sleep16"]')?.checked ? 'Yes' : 'No';
             data.sleep17 = form.querySelector('[name="sleep17"]')?.checked ? 'Yes' : 'No';
 
@@ -409,22 +463,17 @@
                     body: JSON.stringify(data)
                 });
 
-                form.reset();
+                showLookupStatus('✓ RSVP submitted successfully!', 'text-emerald-400');
                 
-                ['foodBlock16', 'foodBlock17', 'foodBlock18'].forEach(id => {
-                    const block = document.getElementById(id);
-                    if (block) block.classList.add('hidden');
-                });
-
                 setTimeout(() => {
                     fetchRoster();
                     submitBtn.disabled = false;
                     submitBtn.innerText = '★ Submit / Update Entry ★';
-                }, 2000);
+                }, 1800);
 
             } catch (error) {
-                console.error('Error submitting RSVP:', error);
-                alert('Could not submit RSVP. Please try again.');
+                console.error('Submit error:', error);
+                alert('Could not save RSVP. Please check connection.');
                 submitBtn.disabled = false;
                 submitBtn.innerText = '★ Submit / Update Entry ★';
             }
