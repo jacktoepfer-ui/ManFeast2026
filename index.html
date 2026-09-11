@@ -97,7 +97,7 @@
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">Select Days Attending</label>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-slate-800 hover:border-rose-500 cursor-pointer transition select-none">
-                            <input type="checkbox" name="days" value="Oct 16" onchange="syncDayBlocks()" class="day-checkbox w-5 h-5 text-rose-600 rounded border-slate-700 focus:ring-0 cursor-pointer">
+                            <input type="checkbox" name="days16" value="Yes" onchange="syncDayBlocks()" class="day-checkbox w-5 h-5 text-rose-600 rounded border-slate-700 focus:ring-0 cursor-pointer">
                             <div>
                                 <span class="text-xs sm:text-sm font-bold text-white block">Friday, Oct 16</span>
                                 <span class="text-[10px] text-slate-400">Arrival, Dinner & Movie</span>
@@ -105,7 +105,7 @@
                         </label>
 
                         <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-slate-800 hover:border-rose-500 cursor-pointer transition select-none">
-                            <input type="checkbox" name="days" value="Oct 17" onchange="syncDayBlocks()" class="day-checkbox w-5 h-5 text-rose-600 rounded border-slate-700 focus:ring-0 cursor-pointer">
+                            <input type="checkbox" name="days17" value="Yes" onchange="syncDayBlocks()" class="day-checkbox w-5 h-5 text-rose-600 rounded border-slate-700 focus:ring-0 cursor-pointer">
                             <div>
                                 <span class="text-xs sm:text-sm font-bold text-white block">Saturday, Oct 17</span>
                                 <span class="text-[10px] text-rose-400 font-bold">🔥 THE FEAST 🔥</span>
@@ -113,7 +113,7 @@
                         </label>
 
                         <label class="flex items-center space-x-3 bg-feast-dark p-3.5 rounded-xl border border-slate-800 hover:border-blue-500 cursor-pointer transition select-none">
-                            <input type="checkbox" name="days" value="Oct 18" onchange="syncDayBlocks()" class="day-checkbox w-5 h-5 text-blue-600 rounded border-slate-700 focus:ring-0 cursor-pointer">
+                            <input type="checkbox" name="days18" value="Yes" onchange="syncDayBlocks()" class="day-checkbox w-5 h-5 text-blue-600 rounded border-slate-700 focus:ring-0 cursor-pointer">
                             <div>
                                 <span class="text-xs sm:text-sm font-bold text-white block">Sunday, Oct 18</span>
                                 <span class="text-[10px] text-slate-400">Breakfast & Chill</span>
@@ -292,18 +292,13 @@
         const rosterMobileView = document.getElementById('rosterMobileView');
 
         function syncDayBlocks() {
-            const checkboxes = document.querySelectorAll('.day-checkbox');
-            checkboxes.forEach(cb => {
-                let blockId = '';
-                if (cb.value === 'Oct 16') blockId = 'foodBlock16';
-                if (cb.value === 'Oct 17') blockId = 'foodBlock17';
-                if (cb.value === 'Oct 18') blockId = 'foodBlock18';
+            const cb16 = form.querySelector('[name="days16"]');
+            const cb17 = form.querySelector('[name="days17"]');
+            const cb18 = form.querySelector('[name="days18"]');
 
-                const block = document.getElementById(blockId);
-                if (block) {
-                    block.classList.toggle('hidden', !cb.checked);
-                }
-            });
+            document.getElementById('foodBlock16').classList.toggle('hidden', !cb16.checked);
+            document.getElementById('foodBlock17').classList.toggle('hidden', !cb17.checked);
+            document.getElementById('foodBlock18').classList.toggle('hidden', !cb18.checked);
         }
 
         phoneInput.addEventListener('input', (e) => {
@@ -356,11 +351,11 @@
             form.querySelector('[name="name"]').value = data.name || '';
             form.querySelector('[name="attending"]').value = data.attending || 'Yes';
 
-            const daysAttending = String(data.days || '').toLowerCase();
-            const checkboxes = document.querySelectorAll('.day-checkbox');
-            checkboxes.forEach(cb => {
-                cb.checked = daysAttending.includes(cb.value.toLowerCase());
-            });
+            // Support both new boolean columns (days16) and legacy comma string (days)
+            const legacyDays = String(data.days || '').toLowerCase();
+            form.querySelector('[name="days16"]').checked = String(data.days16).toLowerCase() === 'yes' || legacyDays.includes('16');
+            form.querySelector('[name="days17"]').checked = String(data.days17).toLowerCase() === 'yes' || legacyDays.includes('17');
+            form.querySelector('[name="days18"]').checked = String(data.days18).toLowerCase() === 'yes' || legacyDays.includes('18');
 
             form.querySelector('[name="sleep16"]').checked = String(data.sleep16).toLowerCase() === 'yes';
             form.querySelector('[name="sleep17"]').checked = String(data.sleep17).toLowerCase() === 'yes';
@@ -394,12 +389,10 @@
             }
         }
 
-        // Helper to check if a day tag is present in the database field
-        function hasAttendedDay(rawDaysString, targetTag) {
-            if (!rawDaysString) return false;
-            const normalized = String(rawDaysString).toLowerCase();
-            const tag = String(targetTag).toLowerCase();
-            return normalized.includes(tag);
+        function isDayAttending(item, dayKey, legacySearchTag) {
+            if (String(item[dayKey]).toLowerCase() === 'yes') return true;
+            if (item.days && String(item.days).toLowerCase().includes(legacySearchTag)) return true;
+            return false;
         }
 
         function renderRoster(data) {
@@ -425,10 +418,10 @@
 
             // Desktop Table View
             rosterTableBody.innerHTML = activeData.map(item => {
-                const renderCell = (dayTag, sleepKey, catKey, detKey) => {
-                    const isAttendingDay = hasAttendedDay(item.days, dayTag);
+                const renderCell = (dayKey, legacyTag, sleepKey, catKey, detKey) => {
+                    const attending = isDayAttending(item, dayKey, legacyTag);
                     
-                    if (!isAttendingDay) {
+                    if (!attending) {
                         return '<span class="text-slate-600 text-xs italic">Not attending</span>';
                     }
                     
@@ -445,7 +438,7 @@
                             ${cat ? `<div class="text-[10px] text-rose-400 font-bold uppercase pt-1">Categories: ${cat}</div>` : ''}
                             ${det ? `
                                 <div class="text-xs">
-                                    <strong class="text-slate-400 uppercase text-[9px] block">${dayTag === 'Oct 16' ? '🎬 Movie Suggestion:' : 'Item Details:'}</strong>
+                                    <strong class="text-slate-400 uppercase text-[9px] block">${dayKey === 'days16' ? '🎬 Movie Suggestion:' : 'Item Details:'}</strong>
                                     <span class="text-slate-200">${det}</span>
                                 </div>
                             ` : (!cat ? `<div class="text-[10px] text-slate-500 italic">No items listed</div>` : '')}
@@ -456,18 +449,18 @@
                 return `
                     <tr class="hover:bg-slate-800/40 transition">
                         <td class="p-3 font-bold text-white align-top border-b border-slate-800">${item.name}</td>
-                        <td class="p-3 align-top border-b border-slate-800">${renderCell('Oct 16', 'sleep16', 'food16Category', 'food16Details')}</td>
-                        <td class="p-3 align-top border-b border-slate-800">${renderCell('Oct 17', 'sleep17', 'food17Category', 'food17Details')}</td>
-                        <td class="p-3 align-top border-b border-slate-800">${renderCell('Oct 18', '', 'food18Category', 'food18Details')}</td>
+                        <td class="p-3 align-top border-b border-slate-800">${renderCell('days16', '16', 'sleep16', 'food16Category', 'food16Details')}</td>
+                        <td class="p-3 align-top border-b border-slate-800">${renderCell('days17', '17', 'sleep17', 'food17Category', 'food17Details')}</td>
+                        <td class="p-3 align-top border-b border-slate-800">${renderCell('days18', '18', '', 'food18Category', 'food18Details')}</td>
                     </tr>
                 `;
             }).join('');
 
             // Mobile Card View
             rosterMobileView.innerHTML = activeData.map(item => {
-                const renderMobileDay = (title, dayTag, sleepKey, catKey, detKey) => {
-                    const isAttendingDay = hasAttendedDay(item.days, dayTag);
-                    if (!isAttendingDay) return '';
+                const renderMobileDay = (title, dayKey, legacyTag, sleepKey, catKey, detKey) => {
+                    const attending = isDayAttending(item, dayKey, legacyTag);
+                    if (!attending) return '';
 
                     const isSleeping = String(item[sleepKey] || '').toLowerCase() === 'yes';
                     const cat = item[catKey] ? String(item[catKey]).trim() : '';
@@ -482,7 +475,7 @@
                             ${cat ? `<div class="text-[10px] text-rose-400 font-bold uppercase">${cat}</div>` : ''}
                             ${det ? `
                                 <div class="text-[11px] text-slate-300">
-                                    <span class="text-slate-400">${dayTag === 'Oct 16' ? '🎬 Movie: ' : 'Details: '}</span>${det}
+                                    <span class="text-slate-400">${dayKey === 'days16' ? '🎬 Movie: ' : 'Details: '}</span>${det}
                                 </div>
                             ` : ''}
                         </div>
@@ -496,9 +489,9 @@
                             <span class="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700/60 px-2 py-0.5 rounded font-bold uppercase">Attending</span>
                         </div>
                         <div class="space-y-1.5 pt-1">
-                            ${renderMobileDay('Friday, Oct 16', 'Oct 16', 'sleep16', 'food16Category', 'food16Details')}
-                            ${renderMobileDay('Saturday, Oct 17', 'Oct 17', 'sleep17', 'food17Category', 'food17Details')}
-                            ${renderMobileDay('Sunday, Oct 18', 'Oct 18', '', 'food18Category', 'food18Details')}
+                            ${renderMobileDay('Friday, Oct 16', 'days16', '16', 'sleep16', 'food16Category', 'food16Details')}
+                            ${renderMobileDay('Saturday, Oct 17', 'days17', '17', 'sleep17', 'food17Category', 'food17Details')}
+                            ${renderMobileDay('Sunday, Oct 18', 'days18', '18', '', 'food18Category', 'food18Details')}
                         </div>
                     </div>
                 `;
@@ -515,7 +508,7 @@
             const data = {};
 
             formData.forEach((value, key) => {
-                if (key === 'days' || key === 'food16Category' || key === 'food17Category' || key === 'food18Category') {
+                if (key === 'food16Category' || key === 'food17Category' || key === 'food18Category') {
                     if (!data[key]) data[key] = [];
                     data[key].push(value);
                 } else {
@@ -524,6 +517,9 @@
             });
 
             data.phone = data.phone.replace(/\D/g, '');
+            data.days16 = form.querySelector('[name="days16"]')?.checked ? 'Yes' : 'No';
+            data.days17 = form.querySelector('[name="days17"]')?.checked ? 'Yes' : 'No';
+            data.days18 = form.querySelector('[name="days18"]')?.checked ? 'Yes' : 'No';
             data.sleep16 = form.querySelector('[name="sleep16"]')?.checked ? 'Yes' : 'No';
             data.sleep17 = form.querySelector('[name="sleep17"]')?.checked ? 'Yes' : 'No';
 
